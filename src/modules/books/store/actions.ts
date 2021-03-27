@@ -4,13 +4,29 @@ import bookRepository from '../domain/rest/repositories/BookRepository';
 import axiosHttpResource from '../domain/custom/axiosHttpResource';
 import myBooksService from '../domain/services/MyBooksService';
 
+let count = 0;
+
 function changeID(books) {
-  let count = Math.floor(Math.random() * Math.floor(10));
+  count++;
   return books.map(book => ({
     ...book,
     id: `${book.id}_${count}`,
   }));
 }
+
+export const searchAuthor = createAsyncThunk<Book | null>(
+  'books/searchAuthor',
+  async searchText => {
+    try {
+      return axiosHttpResource('books?search=' + searchText).then(payload => {
+        return payload.data;
+      });
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
 
 export const loadNextPage = createAsyncThunk<Book | null>(
   'books/loadNextPage',
@@ -63,6 +79,18 @@ export const addMyBook = createAsyncThunk<Book | null>(
     } catch (error) {
       console.log(error);
       return error;
+    }
+  },
+);
+
+export const deleteMyBook = createAsyncThunk<Book | null>(
+  'books/deleteBook',
+  async id => {
+    try {
+      return myBooksService.delete(id);
+    } catch (e) {
+      console.log(e);
+      return e;
     }
   },
 );

@@ -16,39 +16,11 @@ export class StorageService {
       return null;
     });
   }
+
+  // public deleteData(key: string): Promise<any> {
+  //   return this.client.removeItem();
+  // }
 }
 
 const storageService = new StorageService(AsyncStorage);
 export default storageService;
-
-// export const addData = async (key: string, value: any) => {
-//   try {
-//     const data = await AsyncStorage.getItem(key);
-//     if (data !== null) {
-//       await AsyncStorage.setItem(key, JSON.stringify([...data, value]));
-//     } else {
-//       await AsyncStorage.setItem(key, JSON.stringify([value]));
-//     }
-//   } catch (e) {
-//     Alert.alert(e);
-//   }
-// };
-//
-// export const storeData = async (key: string, value: any) => {
-//   try {
-//     const jsonValue = JSON.stringify(value);
-//     await AsyncStorage.setItem(key, jsonValue);
-//   } catch (e) {
-//     console.log(e);
-//     return e;
-//   }
-// };
-//
-// export const getData = async (key: string) => {
-//   try {
-//     const jsonValue = await AsyncStorage.getItem(key);
-//     return jsonValue != null ? JSON.parse(jsonValue) : null;
-//   } catch (e) {
-//     Alert.alert(e);
-//   }
-// };

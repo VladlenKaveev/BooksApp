@@ -1,20 +1,15 @@
 import React from 'react';
-import {Card, CardItem, Input, Label, Item} from 'native-base';
+import {Card, CardItem, Label} from 'native-base';
 import {StyleSheet, View, Image, Dimensions} from 'react-native';
 import DisabledRatingStar from './DisabledRatingStar';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {useDispatch} from 'react-redux';
+import {deleteMyBook} from '../../store/actions';
 
 const height = Dimensions.get('window').height;
 
 export const HeaderBar = () => {
   return <View style={styles.header} />;
-};
-
-export const SearchBar = () => {
-  return (
-    <Item style={styles.search_container}>
-      <Input placeholder="Search" style={styles.search} />
-    </Item>
-  );
 };
 
 export const BooksList = ({item}: any) => {
@@ -68,13 +63,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'CircularStd-Medium',
     opacity: 0.7,
-  },
-  search: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-  },
-  search_container: {
-    flex: 1,
-    alignItems: 'flex-end',
   },
 });

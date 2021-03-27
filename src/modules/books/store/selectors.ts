@@ -1,5 +1,4 @@
 import {createSelector} from '@reduxjs/toolkit';
-import {State} from './index';
 
 export const booksStateSelector = state => state.books;
 

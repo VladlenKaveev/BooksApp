@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Label} from 'native-base';
+import {Container, Input, Item, Label} from 'native-base';
 import {
   ActivityIndicator,
   FlatList,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {BooksList, HeaderBar, SearchBar} from '../components';
+import {BooksList, HeaderBar} from '../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadBooks, loadNextPage} from '../../store/actions';
+import {loadBooks, loadNextPage, searchAuthor} from '../../store/actions';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   booksSelector,
@@ -22,17 +22,39 @@ export default function BooksScreen({navigation}: any) {
   const books = useSelector(booksSelector);
   const isLoading = useSelector(loadingSelector);
   const isRefresh = useSelector(refreshSelector);
+  const [searchText, setSearchText] = useState('');
   const handleNextPage = () => {
-    dispatch(loadNextPage());
+    if (!handleSearch) {
+      dispatch(loadNextPage());
+    }
+  };
+  const handleSearch = () => {
+    if (searchText === '') {
+      handleLoadBooks();
+    } else {
+      dispatch(searchAuthor(searchText));
+    }
+  };
+  const handleLoadBooks = () => {
+    dispatch(loadBooks());
   };
   useEffect(() => {
-    dispatch(loadBooks());
-  }, [dispatch]);
+    handleLoadBooks();
+  }, []);
   return (
     <Container style={styles.container}>
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>
         <HeaderBar />
-        <SearchBar />
+        <Item style={styles.search_container}>
+          <Input
+            placeholder="Search"
+            style={styles.search}
+            onChangeText={text => {
+              setSearchText(text);
+            }}
+            onEndEditing={() => handleSearch()}
+          />
+        </Item>
         <Label style={styles.label}>RESULTS</Label>
         {isLoading ? (
           <LoadingIndicator />
@@ -56,7 +78,7 @@ export default function BooksScreen({navigation}: any) {
             keyExtractor={item => item.id}
             style={{height: '75%'}}
             onEndReached={() => handleNextPage()}
-            onEndReachedThreshold={0.4}
+            onEndReachedThreshold={0.1}
             ListFooterComponent={() => {
               if (!isRefresh) {
                 return null;
@@ -80,5 +102,13 @@ const styles = StyleSheet.create({
     paddingLeft: '8%',
     padding: 15,
     opacity: 0.5,
+  },
+  search_container: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  search: {
+    backgroundColor: 'white',
+    borderRadius: 10,
   },
 });

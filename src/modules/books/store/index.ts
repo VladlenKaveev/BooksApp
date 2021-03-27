@@ -6,19 +6,17 @@ import {
   loadMyBooks,
   loadBooks,
   loadNextPage,
+  searchAuthor,
+  deleteMyBook,
 } from './actions';
 
 export type State = {
   books: Book | null;
   isLoading: boolean;
   isRefresh: boolean;
-  error: Error;
   mybooks: any;
-  page: number;
+  // page: number;
 };
-
-//Адаптер
-// const booksAdapter = createEntityAdapter();
 
 const bookSlice = createSlice<State>({
   name: 'books',
@@ -27,7 +25,7 @@ const bookSlice = createSlice<State>({
     isLoading: false,
     isRefresh: false,
     mybooks: null,
-    page: 0,
+    // page: 0,
   },
   reducers: {},
   extraReducers: builder => {
@@ -59,6 +57,16 @@ const bookSlice = createSlice<State>({
       // state.page = state.page + 1;
       state.isRefresh = false;
       state.books = payload;
+    });
+    builder.addCase(searchAuthor.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(searchAuthor.fulfilled, (state, {payload}) => {
+      state.books = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(deleteMyBook.fulfilled, (state, {payload}) => {
+      // state.mybooks = payload;
     });
   },
 });
