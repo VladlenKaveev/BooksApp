@@ -23,12 +23,17 @@ export default function BooksScreen({navigation}: any) {
   const isLoading = useSelector(loadingSelector);
   const isRefresh = useSelector(refreshSelector);
   const [searchText, setSearchText] = useState('');
+  const [
+    onEndReachedCalledDuringMomentum,
+    setEndReachedCalledDuringMomentum,
+  ] = useState(true);
   const handleNextPage = () => {
-    if (!handleSearch) {
+    if (!onEndReachedCalledDuringMomentum) {
       dispatch(loadNextPage());
     }
   };
   const handleSearch = () => {
+    setEndReachedCalledDuringMomentum(true);
     if (searchText === '') {
       handleLoadBooks();
     } else {
@@ -84,6 +89,11 @@ export default function BooksScreen({navigation}: any) {
                 return null;
               }
               return <ActivityIndicator />;
+            }}
+            onMomentumScrollBegin={() => {
+              {
+                setEndReachedCalledDuringMomentum(false);
+              }
             }}
           />
         )}
