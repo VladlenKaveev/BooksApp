@@ -53,7 +53,9 @@ function BottomTab() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarIcon: () => <Icon name="user" size={23} color="#384F7D" />,
+          tabBarIcon: () => (
+            <Icon name="user-circle-o" size={23} color="#384F7D" />
+          ),
         }}
       />
     </Tab.Navigator>

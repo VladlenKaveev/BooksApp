@@ -2,25 +2,19 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Book} from '../domain/interfaces/Book';
 import bookRepository from '../domain/rest/repositories/BookRepository';
 import axiosHttpResource from '../domain/custom/axiosHttpResource';
+import axiosSearchHttpResource from '../domain/custom/axiosSearchHttpResource';
 import myBooksService from '../domain/services/MyBooksService';
-
-let count = 0;
-
-function changeID(books) {
-  count++;
-  return books.map(book => ({
-    ...book,
-    id: `${book.id}_${count}`,
-  }));
-}
+import {changeID} from '../domain/services/BooksService';
 
 export const searchAuthor = createAsyncThunk<Book | null>(
   'books/searchAuthor',
   async searchText => {
     try {
-      return axiosHttpResource('books?search=' + searchText).then(payload => {
-        return payload.data;
-      });
+      return axiosSearchHttpResource('books?search=' + searchText).then(
+        payload => {
+          return payload.data;
+        },
+      );
     } catch (e) {
       console.log(e);
       return e;
@@ -68,10 +62,10 @@ export const axiosLoadBooks = createAsyncThunk<Book | null>(
 
 export const addMyBook = createAsyncThunk<Book | null>(
   'books/addBook',
-  async payload => {
+  async book => {
     try {
-      if (payload !== null) {
-        await myBooksService.add(payload);
+      if (book !== null) {
+        await myBooksService.add(book);
       }
       return myBooksService.load().then(function (payload) {
         return payload;
@@ -83,7 +77,7 @@ export const addMyBook = createAsyncThunk<Book | null>(
   },
 );
 
-export const deleteMyBook = createAsyncThunk<Book | null>(
+export const deleteMyBook = createAsyncThunk<number>(
   'books/deleteBook',
   async id => {
     try {

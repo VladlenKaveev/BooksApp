@@ -66,7 +66,7 @@ const bookSlice = createSlice<State>({
       state.isLoading = false;
     });
     builder.addCase(deleteMyBook.fulfilled, (state, {payload}) => {
-      // state.mybooks = payload;
+      state.mybooks = payload;
     });
   },
 });

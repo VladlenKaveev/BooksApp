@@ -11,11 +11,22 @@ export class MyBooksService {
     return await this.storageService.getData(this.storageKey);
   }
 
-  public async delete(id): Promise<any> {
+  public async set(value: any): Promise<Book> {
+    return await this.storageService.storeData(this.storageKey, value);
+  }
+
+  public async delete(id: number): Promise<any> {
+    console.log(this.load);
     const books = await this.load().then(payload => {
       return payload;
     });
-    //доделать
+    if (Array.isArray(books)) {
+      const filtered = books.filter(data => {
+        return data.id !== id;
+      });
+      await this.set(filtered);
+      return filtered;
+    }
   }
 
   public async add(book: Book): Promise<Book> {
@@ -29,9 +40,9 @@ export class MyBooksService {
     // НУЖНО РЕАЛИЗОВАТЬ УСЛОВИЕ ПРИ КОТОРОМ ID КНИГ НЕ ДОЛЖНЫ БЫТЬ РАВНЫ
     if (Array.isArray(books)) {
       books.push(book);
-      await this.storageService.storeData(this.storageKey, books);
+      await this.set(books);
     } else {
-      await this.storageService.storeData(this.storageKey, new Array(book));
+      await this.set(new Array(book));
     }
     return book;
   }

@@ -1,47 +1,13 @@
 import React, {useEffect} from 'react';
-import {Card, CardItem, Container, Label} from 'native-base';
-import {FlatList, Image, StyleSheet} from 'react-native';
+import {Container} from 'native-base';
+import {FlatList, StyleSheet} from 'react-native';
 import {HeaderBar} from '../components';
 import LinearGradient from 'react-native-linear-gradient';
 import {loadingSelector, myBooksSelector} from '../../store/selectors';
-import {deleteMyBook, loadMyBooks} from '../../store/actions';
+import {loadMyBooks} from '../../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import LoadingIndicator from '../components/LoadingIndicator';
-import DisabledRatingStar from '../components/DisabledRatingStar';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-//переместить в index.tsx и прокинуть dispatch
-export const MyBooksList = ({item}: any, dispatch: any) => {
-  if (item == null) {
-    return <Label>Тут ничего нет :(</Label>;
-  } else {
-    return (
-      <Card style={styles.card}>
-        <CardItem>
-          <Image source={{uri: item.img_url}} style={styles.image} />
-          <Label style={styles.book_name}>
-            {item.book_name}
-            {'\n'}
-            <Label style={styles.book_author}>
-              {item.book_author}
-              {'\n'}
-            </Label>
-            <Label style={styles.book_author}>ID: {item.id}</Label>
-          </Label>
-          <DisabledRatingStar />
-        </CardItem>
-        <CardItem>
-          <Icon
-            name="trash"
-            size={19}
-            color="#384F7D"
-            onPress={() => dispatch(deleteMyBook(item.id))}
-          />
-        </CardItem>
-      </Card>
-    );
-  }
-};
+import {MyBooksList} from '../components';
 
 export default function MyBooksScreen() {
   const dispatch = useDispatch();
@@ -53,14 +19,15 @@ export default function MyBooksScreen() {
   return (
     <Container style={styles.container}>
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>
-        <HeaderBar />
+        <HeaderBar name="My Books" />
         {isLoading ? (
           <LoadingIndicator />
         ) : (
           <FlatList
             data={myBooks}
             renderItem={item => MyBooksList(item, dispatch)}
-            keyExtractor={(item, id) => id.toString()}
+            // keyExtractor={(item, id) => id.toString()}
+            keyExtractor={item => item.id}
             style={{height: '75%'}}
           />
         )}

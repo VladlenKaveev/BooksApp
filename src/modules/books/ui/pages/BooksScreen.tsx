@@ -5,10 +5,16 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import {BooksList, HeaderBar} from '../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadBooks, loadNextPage, searchAuthor} from '../../store/actions';
+import {
+  deleteMyBook,
+  loadBooks,
+  loadNextPage,
+  searchAuthor,
+} from '../../store/actions';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   booksSelector,
@@ -16,6 +22,7 @@ import {
   refreshSelector,
 } from '../../store/selectors';
 import LoadingIndicator from '../components/LoadingIndicator';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function BooksScreen({navigation}: any) {
   const dispatch = useDispatch();
@@ -49,10 +56,10 @@ export default function BooksScreen({navigation}: any) {
   return (
     <Container style={styles.container}>
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>
-        <HeaderBar />
+        <HeaderBar name="Books" />
         <Item style={styles.search_container}>
           <Input
-            placeholder="Search"
+            placeholder="Search book"
             style={styles.search}
             onChangeText={text => {
               setSearchText(text);
@@ -91,9 +98,7 @@ export default function BooksScreen({navigation}: any) {
               return <ActivityIndicator />;
             }}
             onMomentumScrollBegin={() => {
-              {
-                setEndReachedCalledDuringMomentum(false);
-              }
+              setEndReachedCalledDuringMomentum(false);
             }}
           />
         )}
@@ -116,6 +121,8 @@ const styles = StyleSheet.create({
   search_container: {
     flex: 1,
     alignItems: 'flex-end',
+    paddingHorizontal: '7%',
+    borderColor: 'transparent',
   },
   search: {
     backgroundColor: 'white',

@@ -21,7 +21,7 @@ function SelectedBook({route}: any) {
   const dispatch = useDispatch();
   return (
     <Container style={{flex: 1}}>
-      <HeaderBar />
+      <HeaderBar name="Book" />
       <Card style={styles.card} transparent>
         <CardItem>
           <Image source={{uri: img_url}} style={styles.image} key={id} />

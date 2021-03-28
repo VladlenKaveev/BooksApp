@@ -16,10 +16,6 @@ export class StorageService {
       return null;
     });
   }
-
-  // public deleteData(key: string): Promise<any> {
-  //   return this.client.removeItem();
-  // }
 }
 
 const storageService = new StorageService(AsyncStorage);
