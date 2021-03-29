@@ -1,6 +1,8 @@
+import {Book} from '../interfaces/Book';
+
 let count = 0;
 
-export function changeID(books) {
+export function changeID(books): Book[] {
   count++;
   return books.map(book => ({
     ...book,

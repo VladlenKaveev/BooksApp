@@ -4,7 +4,7 @@ import {FlatList, StyleSheet} from 'react-native';
 import {HeaderBar} from '../components';
 import LinearGradient from 'react-native-linear-gradient';
 import {loadingSelector, myBooksSelector} from '../../store/selectors';
-import {loadMyBooks} from '../../store/actions';
+import {loadMyBooks} from '../../store/my-books/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import LoadingIndicator from '../components/LoadingIndicator';
 import {MyBooksList} from '../components';
@@ -26,9 +26,8 @@ export default function MyBooksScreen() {
           <FlatList
             data={myBooks}
             renderItem={item => MyBooksList(item, dispatch)}
-            // keyExtractor={(item, id) => id.toString()}
             keyExtractor={item => item.id}
-            style={{height: '75%'}}
+            style={{height: '80%'}}
           />
         )}
       </LinearGradient>

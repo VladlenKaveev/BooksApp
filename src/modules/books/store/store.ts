@@ -3,10 +3,12 @@ import {
   combineReducers,
   getDefaultMiddleware,
 } from '@reduxjs/toolkit';
-import booksReducer from './index';
+import booksReducer from './books';
+import mybooksReducer from './my-books';
 
 export const rootReducer = combineReducers({
   books: booksReducer,
+  mybooks: mybooksReducer,
 });
 
 const store = configureStore({

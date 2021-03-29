@@ -1,58 +1,69 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Container, Input, Item, Label} from 'native-base';
 import {
   ActivityIndicator,
   FlatList,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
 } from 'react-native';
 import {BooksList, HeaderBar} from '../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  deleteMyBook,
   loadBooks,
   loadNextPage,
+  refreshBooks,
   searchAuthor,
-} from '../../store/actions';
+} from '../../store/books/actions';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   booksSelector,
   loadingSelector,
-  refreshSelector,
+  refreshingSelector,
 } from '../../store/selectors';
 import LoadingIndicator from '../components/LoadingIndicator';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function BooksScreen({navigation}: any) {
   const dispatch = useDispatch();
   const books = useSelector(booksSelector);
   const isLoading = useSelector(loadingSelector);
-  const isRefresh = useSelector(refreshSelector);
+  const isRefreshing: boolean = useSelector(refreshingSelector);
   const [searchText, setSearchText] = useState('');
   const [
-    onEndReachedCalledDuringMomentum,
+    endReachedCalledDuringMomentum,
     setEndReachedCalledDuringMomentum,
   ] = useState(true);
-  const handleNextPage = () => {
-    if (!onEndReachedCalledDuringMomentum) {
+
+  useEffect(() => {
+    dispatch(loadBooks());
+  }, [dispatch]);
+
+  const onSearchTextChanged = useCallback(
+    text => {
+      setSearchText(text);
+      if (text === '') {
+        setEndReachedCalledDuringMomentum(false);
+        dispatch(loadBooks());
+      } else {
+        setEndReachedCalledDuringMomentum(true);
+      }
+    },
+    [dispatch, setSearchText],
+  );
+
+  const onSearchEndEditing = useCallback(() => {
+    dispatch(searchAuthor(searchText));
+  }, [searchText, dispatch]);
+
+  const onListEndReached = useCallback(() => {
+    if (!isLoading && !isRefreshing && !endReachedCalledDuringMomentum) {
       dispatch(loadNextPage());
     }
-  };
-  const handleSearch = () => {
-    setEndReachedCalledDuringMomentum(true);
-    if (searchText === '') {
-      handleLoadBooks();
-    } else {
-      dispatch(searchAuthor(searchText));
-    }
-  };
-  const handleLoadBooks = () => {
-    dispatch(loadBooks());
-  };
-  useEffect(() => {
-    handleLoadBooks();
-  }, []);
+  }, [dispatch, isLoading, isRefreshing, endReachedCalledDuringMomentum]);
+
+  const onListRefresh = useCallback(() => {
+    dispatch(refreshBooks());
+  }, [dispatch]);
+
   return (
     <Container style={styles.container}>
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>
@@ -61,10 +72,9 @@ export default function BooksScreen({navigation}: any) {
           <Input
             placeholder="Search book"
             style={styles.search}
-            onChangeText={text => {
-              setSearchText(text);
-            }}
-            onEndEditing={() => handleSearch()}
+            value={searchText}
+            onChangeText={onSearchTextChanged}
+            onEndEditing={onSearchEndEditing}
           />
         </Item>
         <Label style={styles.label}>RESULTS</Label>
@@ -89,16 +99,19 @@ export default function BooksScreen({navigation}: any) {
             )}
             keyExtractor={item => item.id}
             style={{height: '75%'}}
-            onEndReached={() => handleNextPage()}
+            onEndReached={onListEndReached}
+            refreshing={isRefreshing}
+            onRefresh={onListRefresh}
             onEndReachedThreshold={0.1}
             ListFooterComponent={() => {
-              if (!isRefresh) {
+              if (!isLoading) {
                 return null;
               }
               return <ActivityIndicator />;
             }}
             onMomentumScrollBegin={() => {
               setEndReachedCalledDuringMomentum(false);
+              console.log(endReachedCalledDuringMomentum);
             }}
           />
         )}

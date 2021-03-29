@@ -16,7 +16,6 @@ export class MyBooksService {
   }
 
   public async delete(id: number): Promise<any> {
-    console.log(this.load);
     const books = await this.load().then(payload => {
       return payload;
     });

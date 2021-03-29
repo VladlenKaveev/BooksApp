@@ -7,6 +7,7 @@ import ProfileScreen from '../books/ui/pages/ProfileScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
+import LoginScreen from '../books/ui/pages/LoginScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -16,6 +17,11 @@ class Navigation extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+          {/*<Stack.Screen*/}
+          {/*  name="Login"*/}
+          {/*  component={LoginScreen}*/}
+          {/*  options={{headerShown: false}}*/}
+          {/*/>*/}
           <Stack.Screen
             name="Tabs"
             component={BottomTab}

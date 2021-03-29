@@ -1,9 +1,9 @@
 import React from 'react';
-import {Card, CardItem, Input, Item, Label} from 'native-base';
+import {Card, CardItem, Label} from 'native-base';
 import {StyleSheet, View, Image, Dimensions} from 'react-native';
 import DisabledRatingStar from './DisabledRatingStar';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {deleteMyBook} from '../../store/actions';
+import {deleteMyBook} from '../../store/my-books/actions';
 
 const height = Dimensions.get('window').height;
 
@@ -16,59 +16,50 @@ export const HeaderBar = ({name}) => {
 };
 
 export const MyBooksList = ({item}: any, dispatch: any) => {
-  if (item == null) {
-    return <Label>Тут ничего нет :(</Label>;
-  } else {
-    return (
-      <Card style={styles.card}>
-        <CardItem>
-          <Image source={{uri: item.img_url}} style={styles.image} />
-          <Label style={styles.book_name}>
-            {item.book_name}
+  return (
+    <Card style={styles.card}>
+      <Icon
+        name="trash"
+        size={19}
+        color="#D55E5E"
+        onPress={() => dispatch(deleteMyBook(item.id))}
+        style={{paddingLeft: 16}}
+      />
+      <CardItem>
+        <Image source={{uri: item.img_url}} style={styles.image} />
+        <Label style={styles.book_name}>
+          {item.book_name}
+          {'\n'}
+          <Label style={styles.book_author}>
+            {item.book_author}
             {'\n'}
-            <Label style={styles.book_author}>
-              {item.book_author}
-              {'\n'}
-            </Label>
-            <Label style={styles.book_author}>ID: {item.id}</Label>
           </Label>
-          <DisabledRatingStar />
-        </CardItem>
-        <CardItem>
-          <Icon
-            name="trash"
-            size={19}
-            color="#384F7D"
-            onPress={() => dispatch(deleteMyBook(item.id))}
-          />
-        </CardItem>
-      </Card>
-    );
-  }
+          <Label style={styles.book_author}>ID: {item.id}</Label>
+        </Label>
+        <DisabledRatingStar />
+      </CardItem>
+    </Card>
+  );
 };
 
 export const BooksList = ({item}: any) => {
-  if (item == null) {
-    return <Label>Тут ничего нет :(</Label>;
-  } else {
-    return (
-      <Card style={styles.card}>
-        <CardItem>
-          <Image source={{uri: item.img_url}} style={styles.image} />
-          <Label style={styles.book_name}>
-            {item.book_name}
+  return (
+    <Card style={styles.card}>
+      <CardItem>
+        <Image source={{uri: item.img_url}} style={styles.image} />
+        <Label style={styles.book_name}>
+          {item.book_name}
+          {'\n'}
+          <Label style={styles.book_author}>
+            {item.book_author}
             {'\n'}
-            <Label style={styles.book_author}>
-              {item.book_author}
-              {'\n'}
-            </Label>
-            <Label style={styles.book_author}>ID: {item.id}</Label>
           </Label>
-          <DisabledRatingStar />
-        </CardItem>
-      </Card>
-    );
-  }
+          <Label style={styles.book_author}>ID: {item.id}</Label>
+        </Label>
+        <DisabledRatingStar />
+      </CardItem>
+    </Card>
+  );
 };
 
 const styles = StyleSheet.create({

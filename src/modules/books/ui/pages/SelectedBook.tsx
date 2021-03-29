@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {
   Container,
@@ -13,7 +13,7 @@ import {HeaderBar} from '../components';
 import RatingStar from '../components/RatingStar';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useDispatch} from 'react-redux';
-import {addMyBook} from '../../store/actions';
+import {addMyBook} from '../../store/my-books/actions';
 
 function SelectedBook({route}: any) {
   const {id, book_name, book_author, description, img_url} = route.params;
