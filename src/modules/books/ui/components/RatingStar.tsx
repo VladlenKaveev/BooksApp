@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import StarRating from 'react-native-star-rating';
-import {getData, storeData} from '../../domain/services/AsyncStorage';
+import {getData, storeData} from '../../../core/services/AsyncStorage';
 
 export default function RatingStar() {
   // const [starCount, setStarCount] = useState(0);

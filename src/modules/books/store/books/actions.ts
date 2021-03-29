@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Book} from '../../domain/interfaces/Book';
 import bookRepository from '../../domain/rest/repositories/BookRepository';
 import {changeID} from '../../domain/helpers/ChangeBooksID';
-import {pageParamsSelector} from '../selectors';
+import {pageParamsSelector} from './selectors';
 import bookService, {BooksLoadParams} from '../../domain/custom/BookService';
 
 const defaultLoadParams = {
@@ -61,7 +61,7 @@ export const loadBooks = createAsyncThunk<Book[] | null>(
   async () => {
     try {
       return bookRepository.load(defaultLoadParams);
-      // return bookService.load(defaultLoadParams);    axios
+      // return bookService.load(defaultLoadParams);
     } catch (error) {
       console.log(error);
       return error;

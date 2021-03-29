@@ -19,13 +19,13 @@ import {
   booksSelector,
   loadingSelector,
   refreshingSelector,
-} from '../../store/selectors';
+} from '../../store/books/selectors';
 import LoadingIndicator from '../components/LoadingIndicator';
 
 export default function BooksScreen({navigation}: any) {
   const dispatch = useDispatch();
-  const books = useSelector(booksSelector);
-  const isLoading = useSelector(loadingSelector);
+  const books: any = useSelector(booksSelector);
+  const isLoading: boolean = useSelector(loadingSelector);
   const isRefreshing: boolean = useSelector(refreshingSelector);
   const [searchText, setSearchText] = useState('');
   const [

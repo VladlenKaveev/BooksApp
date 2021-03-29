@@ -1,4 +1,6 @@
-import storageService, {StorageService} from './AsyncStorage';
+import storageService, {
+  StorageService,
+} from '../../../core/services/AsyncStorage';
 import {Book} from '../interfaces/Book';
 
 export class MyBooksService {

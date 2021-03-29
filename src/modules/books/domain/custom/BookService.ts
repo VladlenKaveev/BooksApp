@@ -5,7 +5,7 @@ import Config from 'react-native-config';
 export type BooksLoadParams = {
   page?: string | number;
   per_page?: string | number;
-  search?: string;
+  search?: object;
 };
 
 export class BookService {

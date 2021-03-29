@@ -7,35 +7,37 @@ import ProfileScreen from '../books/ui/pages/ProfileScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
-import LoginScreen from '../books/ui/pages/LoginScreen';
+import LoginScreen from '../auth/ui/pages/LoginScreen';
+import {useSelector} from 'react-redux';
+import {isLoginSelector} from '../auth/store/selectors';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-class Navigation extends React.Component {
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          {/*<Stack.Screen*/}
-          {/*  name="Login"*/}
-          {/*  component={LoginScreen}*/}
-          {/*  options={{headerShown: false}}*/}
-          {/*/>*/}
-          <Stack.Screen
-            name="Tabs"
-            component={BottomTab}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="SelectedBook"
-            component={SelectedBook}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+function Navigation() {
+  const isLogin = useSelector(isLoginSelector);
+  console.log('isLogin', isLogin);
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Tabs"
+          component={BottomTab}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SelectedBook"
+          component={SelectedBook}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 function BottomTab() {

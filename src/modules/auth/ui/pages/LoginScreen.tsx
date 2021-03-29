@@ -1,16 +1,19 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button, Card, CardItem, Container, Input, Label} from 'native-base';
 import {useDispatch} from 'react-redux';
-import {HeaderBar} from '../components';
+import {HeaderBar} from '../../../books/ui/components';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const handleSubmit = () => {
-    //dispatch()
-  };
+  const handleSubmit = useCallback(
+    payload => {
+      dispatch(loginUser());
+    },
+    [dispatch],
+  );
   return (
     <Container style={styles.container}>
       <HeaderBar name="Login" />
