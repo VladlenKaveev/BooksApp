@@ -1,20 +1,32 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getAuthToken} from './actions';
+import {setAuthToken, userLogin} from './actions';
 
 export type State = {
   isLogin: boolean;
-  authToken: string;
+  authToken: string | null;
+  isLoading: boolean;
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
     isLogin: false,
-    authToken: '',
+    authToken: null,
+    isLoading: false,
   },
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(getAuthToken.fulfilled, (state, {payload}) => {
+    builder.addCase(userLogin.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(userLogin.fulfilled, (state, {payload}) => {
+      // state.authToken = payload;
+      console.log(state.authToken);
+    });
+    builder.addCase(userLogin.rejected, state => {
+      state.isLoading = false;
+    });
+    builder.addCase(setAuthToken.fulfilled, (state, {payload}) => {
       state.authToken = payload;
     });
   },

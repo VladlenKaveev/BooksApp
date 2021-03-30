@@ -3,18 +3,18 @@ import {
   combineReducers,
   getDefaultMiddleware,
 } from '@reduxjs/toolkit';
-import booksReducer from './books';
-import mybooksReducer from './my-books';
-import authReducer from './../../auth/store/index';
+import booksReducer from './modules/books/store/books';
+import mybooksReducer from './modules/books/store/my-books';
+import authReducer from './modules/auth/store';
 
-export const rootBooksReducer = combineReducers({
+export const rootReducer = combineReducers({
   books: booksReducer,
   mybooks: mybooksReducer,
   auth: authReducer,
 });
 
 const store = configureStore({
-  reducer: rootBooksReducer,
+  reducer: rootReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),

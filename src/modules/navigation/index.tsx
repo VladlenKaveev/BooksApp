@@ -9,32 +9,55 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
 import LoginScreen from '../auth/ui/pages/LoginScreen';
 import {useSelector} from 'react-redux';
-import {isLoginSelector} from '../auth/store/selectors';
+import {
+  authTokenSelector,
+  isLoadingSelector,
+  isLoginSelector,
+} from '../auth/store/selectors';
+import LoadingIndicator from '../books/ui/components/LoadingIndicator';
+import {Container} from 'native-base';
+import {StyleSheet} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function Navigation() {
   const isLogin = useSelector(isLoginSelector);
-  console.log('isLogin', isLogin);
+  const authToken = useSelector(authTokenSelector);
+  const isLoading = useSelector(isLoadingSelector);
+  // if (isLoading) {
+  //   setTimeout(console.log('LOADING'), 1000);
+  //   return (
+  //     <Container style={styles.loading}>
+  //       <LoadingIndicator />
+  //     </Container>
+  //   );
+  // }
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Tabs"
-          component={BottomTab}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SelectedBook"
-          component={SelectedBook}
-          options={{headerShown: false}}
-        />
+        {authToken == null ? (
+          <>
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{headerShown: false}}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Tabs"
+              component={BottomTab}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="SelectedBook"
+              component={SelectedBook}
+              options={{headerShown: false}}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -70,12 +93,10 @@ function BottomTab() {
   );
 }
 
-// const styles = StyleSheet.create({
-//   icon: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-// });
+const styles = StyleSheet.create({
+  loading: {
+    justifyContent: 'center',
+  },
+});
 
 export default Navigation;
