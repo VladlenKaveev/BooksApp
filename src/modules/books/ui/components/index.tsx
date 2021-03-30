@@ -65,7 +65,7 @@ export const BooksList = ({item}: any) => {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#D55E5E',
-    height: height / 5,
+    height: height / 6,
     borderBottomLeftRadius: 100,
     borderBottomRightRadius: 100,
     justifyContent: 'center',

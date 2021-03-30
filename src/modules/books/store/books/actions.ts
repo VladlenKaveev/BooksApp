@@ -3,7 +3,7 @@ import {Book} from '../../domain/interfaces/Book';
 import bookRepository from '../../domain/rest/repositories/BookRepository';
 import {changeID} from '../../domain/helpers/ChangeBooksID';
 import {pageParamsSelector} from './selectors';
-import bookService, {BooksLoadParams} from '../../domain/custom/BookService';
+import bookService, {BooksLoadParams} from '../../domain/services/BookService';
 
 const defaultLoadParams = {
   page: 1,

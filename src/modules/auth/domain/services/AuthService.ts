@@ -1,7 +1,6 @@
 import storageService, {
   StorageService,
 } from '../../../core/services/AsyncStorage';
-// import {Book} from '../interfaces/Book';
 
 export class AuthService {
   constructor(
@@ -14,6 +13,9 @@ export class AuthService {
   }
   public async store(value: string): Promise<any> {
     return await this.storageService.storeData(this.storageKey, value);
+  }
+  public async delete(): Promise<any> {
+    return await this.storageService.storeData(this.storageKey, null);
   }
 }
 

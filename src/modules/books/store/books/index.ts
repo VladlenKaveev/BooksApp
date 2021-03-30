@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Book} from '../../domain/interfaces/Book';
 import {loadBooks, loadNextPage, searchAuthor, refreshBooks} from './actions';
-import {BooksLoadParams} from '../../domain/custom/BookService';
+import {BooksLoadParams} from '../../domain/services/BookService';
 
 export type State = {
   books: Book[] | null;
@@ -28,7 +28,7 @@ const bookSlice = createSlice({
       state.books = payload;
       state.isLoading = false;
     });
-    builder.addCase(loadBooks.rejected, (state, {payload}) => {
+    builder.addCase(loadBooks.rejected, state => {
       state.isLoading = false;
     });
 
@@ -40,7 +40,7 @@ const bookSlice = createSlice({
       state.books = payload;
       state.isRefreshing = false;
     });
-    builder.addCase(refreshBooks.rejected, (state, {payload}) => {
+    builder.addCase(refreshBooks.rejected, state => {
       state.isRefreshing = false;
     });
 
@@ -58,7 +58,7 @@ const bookSlice = createSlice({
       state.books = payload;
       state.isLoading = false;
     });
-    builder.addCase(searchAuthor.rejected, (state, {payload}) => {
+    builder.addCase(searchAuthor.rejected, state => {
       state.isLoading = false;
     });
   },

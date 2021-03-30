@@ -1,5 +1,5 @@
 import {BaseRestResource} from '@snap-alex/domain-js';
 import httpResource from '../../../core/infrastructure/httpResource';
 
-const authResource = new BaseRestResource(httpResource, 'books/auth');
+const authResource = new BaseRestResource(httpResource, 'auth');
 export default authResource;

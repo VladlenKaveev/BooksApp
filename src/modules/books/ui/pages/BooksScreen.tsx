@@ -33,10 +33,6 @@ export default function BooksScreen({navigation}: any) {
     setEndReachedCalledDuringMomentum,
   ] = useState(true);
 
-  useEffect(() => {
-    dispatch(loadBooks());
-  }, [dispatch]);
-
   const onSearchTextChanged = useCallback(
     text => {
       setSearchText(text);
@@ -64,6 +60,9 @@ export default function BooksScreen({navigation}: any) {
     dispatch(refreshBooks());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(loadBooks());
+  }, [dispatch]);
   return (
     <Container style={styles.container}>
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>

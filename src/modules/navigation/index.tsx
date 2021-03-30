@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import BooksScreen from '../books/ui/pages/BooksScreen';
@@ -8,59 +8,60 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
 import LoginScreen from '../auth/ui/pages/LoginScreen';
-import {useSelector} from 'react-redux';
-import {
-  authTokenSelector,
-  isLoadingSelector,
-  isLoginSelector,
-} from '../auth/store/selectors';
+import {useDispatch, useSelector} from 'react-redux';
+import {authTokenSelector, isLoadingSelector} from '../auth/store/selectors';
 import LoadingIndicator from '../books/ui/components/LoadingIndicator';
 import {Container} from 'native-base';
 import {StyleSheet} from 'react-native';
+import {getToken} from '../auth/store/actions';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function Navigation() {
-  const isLogin = useSelector(isLoginSelector);
-  const authToken = useSelector(authTokenSelector);
+  const dispatch = useDispatch();
   const isLoading = useSelector(isLoadingSelector);
-  // if (isLoading) {
-  //   setTimeout(console.log('LOADING'), 1000);
-  //   return (
-  //     <Container style={styles.loading}>
-  //       <LoadingIndicator />
-  //     </Container>
-  //   );
-  // }
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {authToken == null ? (
-          <>
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{headerShown: false}}
-            />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              name="Tabs"
-              component={BottomTab}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="SelectedBook"
-              component={SelectedBook}
-              options={{headerShown: false}}
-            />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  const authToken = useSelector(authTokenSelector);
+  useEffect(() => {
+    dispatch(getToken());
+  }, [dispatch]);
+  if (isLoading) {
+    //setTimeout(() => {},2000)
+    return (
+      <Container style={styles.loading}>
+        <LoadingIndicator />
+      </Container>
+    );
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          {authToken == null ? (
+            <>
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{headerShown: false}}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="Tabs"
+                component={BottomTab}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="SelectedBook"
+                component={SelectedBook}
+                options={{headerShown: false}}
+              />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 function BottomTab() {
