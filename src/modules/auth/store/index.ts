@@ -35,7 +35,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(getToken.rejected, state => {
-      state.isLoading = false; //опять не работает :( thunkAPI пробовал
+      state.isLoading = false;
     });
   },
 });

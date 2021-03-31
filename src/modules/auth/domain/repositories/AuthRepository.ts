@@ -1,5 +1,5 @@
 import {BaseRepository} from '@snap-alex/domain-js';
-import authResource from '../resource/AuthResource';
+import authResource from '../resources/AuthResource';
 
 export class AuthRepository extends BaseRepository<any> {
   public async get(auth: string): Promise<any> {

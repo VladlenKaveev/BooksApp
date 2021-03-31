@@ -1,18 +1,11 @@
 import {FetchResource} from '@snap-alex/domain-js';
 import fetch from 'cross-fetch';
 import Config from 'react-native-config';
-import authService from '../../auth/domain/services/AuthService';
 
-const authToken = authService.load().then(payload => {
-  return payload;
-});
 const httpResource = new FetchResource(
   Config.APIARY_URL,
-  // Config.AUTH_APIARY_URL,
   {
-    headers: {
-      'X-Auth': `Bearer ${authToken}`,
-    },
+    trailingSlash: false,
   },
   fetch,
 );

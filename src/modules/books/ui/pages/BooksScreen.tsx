@@ -110,7 +110,6 @@ export default function BooksScreen({navigation}: any) {
             }}
             onMomentumScrollBegin={() => {
               setEndReachedCalledDuringMomentum(false);
-              console.log(endReachedCalledDuringMomentum);
             }}
           />
         )}
