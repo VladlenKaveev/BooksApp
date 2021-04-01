@@ -9,11 +9,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
 import LoginScreen from '../auth/ui/pages/LoginScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {authTokenSelector, isLoadingSelector} from '../auth/store/selectors';
+import {responseSelector, isLoadingSelector} from '../auth/store/selectors';
 import LoadingIndicator from '../books/ui/components/LoadingIndicator';
 import {Container} from 'native-base';
 import {StyleSheet} from 'react-native';
-import {getToken} from '../auth/store/actions';
+import {checkLogin} from '../auth/store/actions';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -21,9 +21,9 @@ const Stack = createStackNavigator();
 function Navigation() {
   const dispatch = useDispatch();
   const isLoading = useSelector(isLoadingSelector);
-  const authToken = useSelector(authTokenSelector);
+  const response = useSelector(responseSelector);
   useEffect(() => {
-    dispatch(getToken());
+    dispatch(checkLogin());
   }, [dispatch]);
   if (isLoading) {
     //setTimeout(() => {},2000)
@@ -36,7 +36,7 @@ function Navigation() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          {authToken == null ? (
+          {response == null ? (
             <>
               <Stack.Screen
                 name="Login"

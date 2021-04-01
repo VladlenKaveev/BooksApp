@@ -1,17 +1,19 @@
 import React from 'react';
-import {Container, Label, ListItem, Body, Right, Left} from 'native-base';
+import {Container, Label, ListItem, Body, Right} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {HeaderBar} from '../components';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useDispatch} from 'react-redux';
-import {deleteToken} from '../../../auth/store/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {logOut} from '../../../auth/store/actions';
+import {responseSelector} from '../../../auth/store/selectors';
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
   const handleSignOut = () => {
-    dispatch(deleteToken());
+    dispatch(logOut());
   };
+  const response = useSelector(responseSelector);
   return (
     <Container style={styles.container}>
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>

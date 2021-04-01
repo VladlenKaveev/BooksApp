@@ -5,6 +5,9 @@ import Config from 'react-native-config';
 const httpResource = new FetchResource(
   Config.APIARY_URL,
   {
+    headers: {
+      'Content-Type': 'application/json',
+    },
     trailingSlash: false,
   },
   fetch,

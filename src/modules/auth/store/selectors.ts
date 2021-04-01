@@ -2,9 +2,9 @@ import {createSelector} from '@reduxjs/toolkit';
 
 export const authStateSelector = state => state.auth;
 
-export const authTokenSelector = createSelector(
+export const responseSelector = createSelector(
   authStateSelector,
-  state => state.authToken,
+  state => state.response,
 );
 
 export const isLoadingSelector = createSelector(

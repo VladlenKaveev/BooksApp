@@ -1,17 +1,22 @@
 import React, {useCallback, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Button, Card, CardItem, Container, Input, Label} from 'native-base';
 import {useDispatch} from 'react-redux';
 import {HeaderBar} from '../../../books/ui/components';
-import {userLogin} from '../../store/actions';
+import {logIn} from '../../store/actions';
+import {AuthCredentials} from '../../domain/interfaces/AuthCredentials';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const handleSubmit = useCallback(() => {
-    dispatch(userLogin());
-  }, [dispatch]);
+    const credentials: AuthCredentials = {
+      email: email,
+      password: password,
+    };
+    dispatch(logIn(credentials));
+  }, [dispatch, email, password]);
   return (
     <Container style={styles.container}>
       <HeaderBar name="Login" />
@@ -20,7 +25,9 @@ export default function LoginScreen() {
           <Input
             placeholder="E-mail"
             value={email}
-            onChangeText={text => setEmail(text)}
+            onChangeText={text => {
+              setEmail(text);
+            }}
           />
         </CardItem>
         <CardItem>

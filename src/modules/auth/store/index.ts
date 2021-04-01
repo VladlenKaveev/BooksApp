@@ -1,40 +1,41 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {deleteToken, userLogin, getToken} from './actions';
+import {checkLogin, logOut, logIn} from './actions';
+import {AuthCredentials} from '../domain/interfaces/AuthCredentials';
 
 export type State = {
-  authToken: string | null;
+  credentials: AuthCredentials | null;
   isLoading: boolean;
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    authToken: null,
+    response: null,
     isLoading: false,
   },
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(userLogin.pending, state => {
+    builder.addCase(logIn.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(userLogin.fulfilled, (state, {payload}) => {
-      state.authToken = payload;
+    builder.addCase(logIn.fulfilled, (state, {payload}) => {
+      state.response = payload;
+      state.isLoading = false; // не работает rejected :(
+    });
+    builder.addCase(logIn.rejected, state => {
       state.isLoading = false;
     });
-    builder.addCase(userLogin.rejected, state => {
-      state.isLoading = false; //опять не работает :( thunkAPI пробовал
+    builder.addCase(logOut.fulfilled, state => {
+      state.response = null;
     });
-    builder.addCase(deleteToken.fulfilled, state => {
-      state.authToken = null;
-    });
-    builder.addCase(getToken.pending, state => {
+    builder.addCase(checkLogin.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(getToken.fulfilled, (state, {payload}) => {
-      state.authToken = payload;
-      state.isLoading = false;
+    builder.addCase(checkLogin.fulfilled, (state, {payload}) => {
+      state.response = payload;
+      state.isLoading = false; // не работает rejected :(
     });
-    builder.addCase(getToken.rejected, state => {
+    builder.addCase(checkLogin.rejected, state => {
       state.isLoading = false;
     });
   },

@@ -1,27 +1,24 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import authRepository from '../domain/repositories/AuthRepository';
 import authService from '../domain/services/AuthService';
-import {AccessToken} from '../domain/interfaces/AccessToken';
+import {AuthCredentials} from '../domain/interfaces/AuthCredentials';
+import {AuthResponse} from '../domain/interfaces/AuthResponse';
 
-export const userLogin = createAsyncThunk<AccessToken | null>(
-  'auth/userLogin',
-  async () => {
-    return await authRepository.load().then(token => {
-      authService.storeToken(token.access_token);
-      return token.access_token;
+export const logIn = createAsyncThunk<AuthResponse, AuthCredentials>(
+  'auth/logIn',
+  async credentials => {
+    return await authService.login(credentials).then(response => {
+      return response;
     });
   },
 );
 
-export const deleteToken = createAsyncThunk<any>('auth/deleteToken', () => {
-  return authService.delete();
+export const logOut = createAsyncThunk<any>('auth/logOut', () => {
+  return authService.logout();
 });
 
-export const getToken = createAsyncThunk<AccessToken | null>(
-  'auth/getToken',
-  async () => {
-    return await authService.load().then(token => {
-      return token;
-    });
+export const checkLogin = createAsyncThunk<AuthResponse | null>(
+  'auth/checkLogin',
+  () => {
+    return authService.checklogin();
   },
 );
