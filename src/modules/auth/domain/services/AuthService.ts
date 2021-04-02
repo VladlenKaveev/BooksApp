@@ -15,14 +15,12 @@ export class AuthService {
   ) {}
 
   public async login(credentials: AuthCredentials): Promise<AuthResponse> {
-    const access_token = await AuthService.getToken().then(payload => {
-      return payload;
-    });
-    const response = {
-      credentials: credentials,
-      access_token: access_token,
-    };
-    await this.setAuthHeader(access_token);
+    const response = await AuthService.createAuthResponse(credentials).then(
+      payload => {
+        return payload;
+      },
+    );
+    await this.setAuthHeader(response.access_token);
     this.store(response);
     return response;
   }
@@ -37,9 +35,23 @@ export class AuthService {
     });
   }
 
-  private static getToken(): Promise<string> {
-    return authRepository.load().then(data => {
-      return data.access_token;
+  private static async createAuthResponse(
+    credentials: AuthCredentials,
+  ): Promise<any> {
+    const access_token = await AuthService.getToken(credentials).then(
+      payload => {
+        return payload;
+      },
+    );
+    return {
+      credentials: credentials,
+      access_token: access_token,
+    };
+  }
+
+  private static getToken(credentials: AuthCredentials): Promise<string> {
+    return authRepository.create(credentials).then(data => {
+      return data.data.access_token;
     });
   }
 
