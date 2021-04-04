@@ -3,14 +3,14 @@ import {checkLogin, logOut, logIn} from './actions';
 import {AuthCredentials} from '../domain/interfaces/AuthCredentials';
 
 export type State = {
-  credentials: AuthCredentials | null;
+  response: AuthCredentials | null;
   isLoading: boolean;
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    response: null,
+    response: null, //не верно
     isLoading: false,
   },
   reducers: {},

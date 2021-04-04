@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 import {HeaderBar} from '../../../books/ui/components';
 import {logIn} from '../../store/actions';
 import {AuthCredentials} from '../../domain/interfaces/AuthCredentials';
+import WelcomeAnimation from '../components/WelcomeAnimation';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -20,7 +21,8 @@ export default function LoginScreen() {
   return (
     <Container style={styles.container}>
       <HeaderBar name="Login" />
-      <Card>
+      <WelcomeAnimation />
+      <Card transparent>
         <CardItem>
           <Input
             placeholder="E-mail"

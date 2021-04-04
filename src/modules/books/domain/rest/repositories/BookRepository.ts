@@ -4,7 +4,7 @@ import {Book} from '../../interfaces/Book';
 
 export class BookRepository extends BaseRepository<Book> {
   public async get(page: string): Promise<Book> {
-    return this.resource().get(page, {contentType: 'form-data'});
+    return this.resource().get(page);
   }
 }
 

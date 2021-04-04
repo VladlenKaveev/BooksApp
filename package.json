@@ -19,6 +19,7 @@
     "@snap-alex/domain-js": "^5.0.1",
     "axios": "^0.21.1",
     "cross-fetch": "^3.1.0",
+    "lottie-react-native": "^3.5.0",
     "native-base": "^2.15.2",
     "react": "17.0.1",
     "react-native": "0.64.0",

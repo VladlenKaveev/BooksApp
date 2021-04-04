@@ -19,6 +19,7 @@
 		8353BEFA5F12425FB6D8F372 /* CircularStd-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCA5A97E42264601A962B711 /* CircularStd-Black.ttf */; };
 		8890BD3786884D6B999BDDE0 /* CircularStd-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B30D683BEE46DA8E0D1A53 /* CircularStd-Medium.ttf */; };
 		944B63C2CA0F44DE9396D04E /* CircularStd-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C81531B47340208CAE8C0C /* CircularStd-MediumItalic.ttf */; };
+		BFF8F534261A255200B243DA /* libswiftWebKit.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF8F533261A255200B243DA /* libswiftWebKit.tbd */; };
 		C62507392AFC44D9D3178022 /* libPods-BooksApp-BooksAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E6BF3712AB16F1372EE54F /* libPods-BooksApp-BooksAppTests.a */; };
 		E126790B1BFA421BBF093FB4 /* CircularStd-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CF32B0591417B9AE6B163 /* CircularStd-BlackItalic.ttf */; };
 		E81FBF91094649AFA45CDE7D /* CircularStd-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A7CCD213EF24341A3E8656B /* CircularStd-Bold.ttf */; };
@@ -55,6 +56,7 @@
 		A1F4076A8F713F11F1E76CC9 /* Pods-BooksApp-BooksAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BooksApp-BooksAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BooksApp-BooksAppTests/Pods-BooksApp-BooksAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A257FEF60BB38768877712B0 /* Pods-BooksApp-BooksAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BooksApp-BooksAppTests.release.xcconfig"; path = "Target Support Files/Pods-BooksApp-BooksAppTests/Pods-BooksApp-BooksAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B53B2061190444238387736D /* CircularStd-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-Book.ttf"; path = "../assets/fonts/CircularStd-Book.ttf"; sourceTree = "<group>"; };
+		BFF8F533261A255200B243DA /* libswiftWebKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftWebKit.tbd; path = usr/lib/swift/libswiftWebKit.tbd; sourceTree = SDKROOT; };
 		C51CF32B0591417B9AE6B163 /* CircularStd-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-BlackItalic.ttf"; path = "../assets/fonts/CircularStd-BlackItalic.ttf"; sourceTree = "<group>"; };
 		CE2EFC5B88D14902865812D6 /* CircularStd-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-BoldItalic.ttf"; path = "../assets/fonts/CircularStd-BoldItalic.ttf"; sourceTree = "<group>"; };
 		DCA5A97E42264601A962B711 /* CircularStd-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-Black.ttf"; path = "../assets/fonts/CircularStd-Black.ttf"; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFF8F534261A255200B243DA /* libswiftWebKit.tbd in Frameworks */,
 				1D863B019F5423DF1592E14B /* libPods-BooksApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +133,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFF8F533261A255200B243DA /* libswiftWebKit.tbd */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				1894994685A85DB3D3766A5B /* libPods-BooksApp.a */,
 				F8E6BF3712AB16F1372EE54F /* libPods-BooksApp-BooksAppTests.a */,
@@ -526,9 +530,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BooksApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -551,9 +560,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = BooksApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

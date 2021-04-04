@@ -19,6 +19,6 @@ export const logOut = createAsyncThunk<any>('auth/logOut', () => {
 export const checkLogin = createAsyncThunk<AuthResponse | null>(
   'auth/checkLogin',
   () => {
-    return authService.checklogin();
+    return authService.checkLogin();
   },
 );
