@@ -2,45 +2,23 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Book} from '../../domain/interfaces/Book';
 import myBooksService from '../../domain/services/MyBooksService';
 
-export const addMyBook = createAsyncThunk<Book | null>(
-  'myBooks/addBook',
+export const addMyBook = createAsyncThunk<Book[] | null, Book>(
+  'mybooks/addBook',
   async book => {
-    try {
-      if (book !== null) {
-        await myBooksService.add(book);
-      }
-      return myBooksService.load().then(function (payload) {
-        return payload;
-      });
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
+    return myBooksService.add(book);
   },
 );
 
-export const deleteMyBook = createAsyncThunk<number>(
-  'myBooks/deleteBook',
+export const deleteMyBook = createAsyncThunk<Book[] | null, number>(
+  'mybooks/deleteBook',
   async id => {
-    try {
-      return myBooksService.delete(id);
-    } catch (e) {
-      console.log(e);
-      return e;
-    }
+    return myBooksService.delete(id);
   },
 );
 
-export const loadMyBooks = createAsyncThunk<Book | null>(
-  'myBooks/getBook',
+export const loadMyBooks = createAsyncThunk<Book[] | null>(
+  'mybooks/getBook',
   async () => {
-    try {
-      return myBooksService.load().then(function (payload) {
-        return payload;
-      });
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
+    return myBooksService.loadMyBooks();
   },
 );

@@ -6,7 +6,7 @@ import {Book} from '../../interfaces/Book';
 export class BackgroundTaskService {
   constructor(private backgroundTaskResource: BaseRestResource) {}
 
-  private async createBgTask(): Promise<any> {
+  private async createBgTask(): Promise<Book[]> {
     const taskOptions: BackgroundTaskOptions = {
       task_id: 1,
       status: true,
@@ -17,6 +17,7 @@ export class BackgroundTaskService {
         if (taskOptions.status) {
           taskOptions.success = true;
           this.load(taskOptions).then(data => {
+            console.log(data);
             resolve(data.result);
           });
         } else {
@@ -30,14 +31,13 @@ export class BackgroundTaskService {
     });
   }
 
-  public async getResult(): Promise<any> {
+  public async getResult(): Promise<Book[]> {
     return await this.createBgTask().then(result => {
-      console.log('result', result);
       return result;
     });
   }
 
-  private load(options: BackgroundTaskOptions): Promise<Book> {
+  private load(options: BackgroundTaskOptions): Promise<Book[]> {
     return this.backgroundTaskResource.get(options);
   }
 }

@@ -5,7 +5,7 @@ export default function WelcomeAnimation() {
   return (
     <LottieView
       style={{
-        height: 200,
+        height: 120,
         alignSelf: 'center',
       }}
       source={require('../../../../../assets/open-book.json')}

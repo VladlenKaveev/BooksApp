@@ -9,34 +9,36 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
 import LoginScreen from '../auth/ui/pages/LoginScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {responseSelector, isLoadingSelector} from '../auth/store/selectors';
-import LoadingIndicator from '../books/ui/components/LoadingIndicator';
+import {Loading} from '../books/ui/components';
 import {Container} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {checkLogin} from '../auth/store/actions';
+import {
+  isAuthLoadingSelector,
+  isUserLoginSelector,
+} from '../auth/store/selectors';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function Navigation() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(isLoadingSelector);
-  const response = useSelector(responseSelector);
+  const isAuthLoading: boolean = useSelector(isAuthLoadingSelector);
+  const isUserLogin: boolean = useSelector(isUserLoginSelector);
   useEffect(() => {
     dispatch(checkLogin());
   }, [dispatch]);
-  if (isLoading) {
-    //setTimeout(() => {},2000)
+  if (isAuthLoading) {
     return (
       <Container style={styles.loading}>
-        <LoadingIndicator />
+        <Loading />
       </Container>
     );
   } else {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          {response == null ? (
+          {!isUserLogin ? (
             <>
               <Stack.Screen
                 name="Login"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {
   Container,
@@ -14,11 +14,14 @@ import RatingStar from '../components/RatingStar';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useDispatch} from 'react-redux';
 import {addMyBook} from '../../store/my-books/actions';
+import {Book} from '../../domain/interfaces/Book';
 
-function SelectedBook({route}: any) {
-  const {id, book_name, book_author, description, img_url} = route.params;
-  const payload = {id, book_author, book_name, img_url};
+export default function SelectedBook({route}: any) {
+  const {id, book_name, book_author, description, img_url}: Book = route.params;
   const dispatch = useDispatch();
+  const handleTakeBook = useCallback(() => {
+    dispatch(addMyBook(route.params));
+  }, [dispatch, route.params]);
   return (
     <Container style={{flex: 1}}>
       <HeaderBar name="Book" />
@@ -56,9 +59,7 @@ function SelectedBook({route}: any) {
               justifyContent: 'center',
               backgroundColor: '#6790FB',
             }}
-            onPress={() => {
-              dispatch(addMyBook(payload));
-            }}>
+            onPress={handleTakeBook}>
             <Label style={styles.button_label}>TAKE A BOOK</Label>
           </Button>
         </CardItem>
@@ -117,5 +118,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default SelectedBook;

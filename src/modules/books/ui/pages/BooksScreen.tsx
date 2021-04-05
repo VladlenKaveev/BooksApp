@@ -20,8 +20,9 @@ import {
   loadingSelector,
   refreshingSelector,
 } from '../../store/books/selectors';
-import LoadingIndicator from '../components/LoadingIndicator';
+import {Loading} from '../components';
 
+//могу ли я использовать any здесь?
 export default function BooksScreen({navigation}: any) {
   const dispatch = useDispatch();
   const books: any = useSelector(booksSelector);
@@ -78,7 +79,7 @@ export default function BooksScreen({navigation}: any) {
         </Item>
         <Label style={styles.label}>RESULTS</Label>
         {isLoading ? (
-          <LoadingIndicator />
+          <Loading />
         ) : (
           <FlatList
             data={books}

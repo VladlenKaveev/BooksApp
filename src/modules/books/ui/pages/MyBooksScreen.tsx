@@ -7,7 +7,7 @@ import {loadingSelector} from '../../store/books/selectors';
 import {myBooksSelector} from '../../store/my-books/selectors';
 import {loadMyBooks} from '../../store/my-books/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import LoadingIndicator from '../components/LoadingIndicator';
+import {Loading} from '../components';
 import {MyBooksList} from '../components';
 
 export default function MyBooksScreen() {
@@ -22,7 +22,7 @@ export default function MyBooksScreen() {
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>
         <HeaderBar name="My Books" />
         {isLoading ? (
-          <LoadingIndicator />
+          <Loading />
         ) : (
           <FlatList
             data={myBooks}

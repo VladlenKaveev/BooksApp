@@ -4,16 +4,14 @@ import {StyleSheet} from 'react-native';
 import {HeaderBar} from '../components';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {logOut} from '../../../auth/store/actions';
-import {responseSelector} from '../../../auth/store/selectors';
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
   const handleSignOut = () => {
     dispatch(logOut());
   };
-  const response = useSelector(responseSelector);
   return (
     <Container style={styles.container}>
       <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>

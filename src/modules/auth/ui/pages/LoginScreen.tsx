@@ -21,7 +21,6 @@ export default function LoginScreen() {
   return (
     <Container style={styles.container}>
       <HeaderBar name="Login" />
-      <WelcomeAnimation />
       <Card transparent>
         <CardItem>
           <Input
@@ -40,8 +39,8 @@ export default function LoginScreen() {
           />
         </CardItem>
         <CardItem>
-          <Button onPress={() => handleSubmit()} style={styles.button}>
-            <Label style={styles.label}>Login</Label>
+          <Button onPress={handleSubmit} style={styles.button}>
+            <WelcomeAnimation />
           </Button>
         </CardItem>
       </Card>

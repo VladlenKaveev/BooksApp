@@ -4,7 +4,7 @@ import storageService, {
 import {BaseResource, BaseRestResource} from '@snap-alex/domain-js';
 import httpResource from '../../../core/infrastructure/httpResource';
 import {AuthCredentials} from '../interfaces/AuthCredentials';
-import {AuthResponse} from '../interfaces/AuthResponse';
+import {UserData} from '../interfaces/UserData';
 import authResource from '../resources/AuthResource';
 
 export class AuthService {
@@ -15,37 +15,28 @@ export class AuthService {
     private authResource: BaseRestResource,
   ) {}
 
-  public async login(credentials: AuthCredentials): Promise<AuthResponse> {
-    const response = await this.createAuthResponse(credentials).then(
-      payload => {
-        return payload;
-      },
-    );
-    await this.setAuthHeader(response.access_token);
-    this.storeUserInfo(response.access_token);
-    return response;
+  public async login(credentials: AuthCredentials): Promise<UserData> {
+    const access_token = await this.getToken(credentials).then(token => {
+      return token;
+    });
+    this.setAuthHeader(access_token);
+    const userData = {
+      email: credentials.email,
+      access_token: access_token,
+    };
+    await this.storeUserData(userData);
+    return userData;
   }
 
   public logout(): Promise<void> {
     return this.clearStoredSession();
   }
 
-  public checkLogin(): Promise<AuthResponse | null> {
-    //дописать
-    return this.extractUserInfo();
+  public checkLogin(): Promise<UserData | null> {
+    return this.extractUserData();
   }
 
-  public async createAuthResponse(credentials: AuthCredentials): Promise<any> {
-    const access_token = await this.getToken(credentials).then(payload => {
-      return payload;
-    });
-    return {
-      credentials: credentials,
-      access_token: access_token,
-    };
-  }
-
-  private getToken(credentials: AuthCredentials): Promise<string> {
+  public getToken(credentials: AuthCredentials): Promise<string> {
     return this.authResource.create(credentials).then(data => {
       return data.data.access_token;
     });
@@ -60,12 +51,12 @@ export class AuthService {
     return this.storageService.storeData(this.storageKey, null);
   }
 
-  private extractUserInfo(): Promise<any> {
+  private extractUserData(): Promise<UserData> {
     return this.storageService.getData(this.storageKey);
   }
 
-  private storeUserInfo(value: any): Promise<any> {
-    return this.storageService.storeData(this.storageKey, value);
+  private storeUserData(userData: UserData): Promise<void> {
+    return this.storageService.storeData(this.storageKey, userData);
   }
 }
 

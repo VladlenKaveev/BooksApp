@@ -10,7 +10,7 @@ export type State = {
   loadParams: BooksLoadParams | null;
 };
 
-const bookSlice = createSlice({
+const BookSlice = createSlice({
   name: 'books',
   initialState: {
     books: [],
@@ -21,10 +21,10 @@ const bookSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     // Initial load
-    builder.addCase(loadBooks.pending, state => {
+    builder.addCase(loadBooks.pending, (state: State) => {
       state.isLoading = true;
     });
-    builder.addCase(loadBooks.fulfilled, (state, {payload}) => {
+    builder.addCase(loadBooks.fulfilled, (state: State, {payload}) => {
       state.books = payload;
       state.isLoading = false;
     });
@@ -33,19 +33,19 @@ const bookSlice = createSlice({
     });
 
     // Refreshing
-    builder.addCase(refreshBooks.pending, state => {
+    builder.addCase(refreshBooks.pending, (state: State) => {
       state.isRefreshing = true;
     });
-    builder.addCase(refreshBooks.fulfilled, (state, {payload}) => {
+    builder.addCase(refreshBooks.fulfilled, (state: State, {payload}) => {
       state.books = payload;
       state.isRefreshing = false;
     });
-    builder.addCase(refreshBooks.rejected, state => {
+    builder.addCase(refreshBooks.rejected, (state: State) => {
       state.isRefreshing = false;
     });
 
     // Load next page
-    builder.addCase(loadNextPage.fulfilled, (state, {payload}) => {
+    builder.addCase(loadNextPage.fulfilled, (state: State, {payload}) => {
       (state.books || []).push(...payload.books);
       state.loadParams = payload.loadParams;
     });
@@ -54,7 +54,7 @@ const bookSlice = createSlice({
     builder.addCase(searchAuthor.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(searchAuthor.fulfilled, (state, {payload}) => {
+    builder.addCase(searchAuthor.fulfilled, (state: State, {payload}) => {
       state.books = payload;
       state.isLoading = false;
     });
@@ -64,6 +64,6 @@ const bookSlice = createSlice({
   },
 });
 
-const booksStore = bookSlice.reducer;
+const booksStore = BookSlice.reducer;
 type booksStore = ReturnType<typeof booksStore>;
 export default booksStore;
