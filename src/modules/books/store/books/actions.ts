@@ -17,7 +17,6 @@ export const searchAuthor = createAsyncThunk<{
 }>('books/searchAuthor', async (searchText: string) => {
   const loadParams = {search: {searchText}};
   return bookService.load(loadParams).then(books => {
-    console.log(books);
     return books.data;
   });
 });

@@ -17,7 +17,6 @@ export class BackgroundTaskService {
         if (taskOptions.status) {
           taskOptions.success = true;
           this.load(taskOptions).then(data => {
-            console.log(data);
             resolve(data.result);
           });
         } else {
