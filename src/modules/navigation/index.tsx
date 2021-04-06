@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
 import LoginScreen from '../auth/ui/pages/LoginScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {Loading} from '../books/ui/components';
+import LoadingIndicator from '../books/ui/components/LoadingIndicator';
 import {Container} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {checkLogin} from '../auth/store/actions';
@@ -31,7 +31,7 @@ function Navigation() {
   if (isAuthLoading) {
     return (
       <Container style={styles.loading}>
-        <Loading />
+        <LoadingIndicator />
       </Container>
     );
   } else {

@@ -1,11 +1,11 @@
 import React, {useCallback, useState} from 'react';
-import {StyleSheet} from 'react-native';
-import {Button, Card, CardItem, Container, Input, Label} from 'native-base';
+import {Card, CardItem, Input, Container} from 'native-base';
 import {useDispatch} from 'react-redux';
-import {HeaderBar} from '../../../books/ui/components';
+import {HeaderBar} from '../../../books/ui/components/header';
 import {logIn} from '../../store/actions';
 import {AuthCredentials} from '../../domain/interfaces/AuthCredentials';
-import WelcomeAnimation from '../components/WelcomeAnimation';
+import LoginButtonAnimation from '../components/LoginButtonAnimation';
+import * as S from './styles';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -19,9 +19,9 @@ export default function LoginScreen() {
     dispatch(logIn(credentials));
   }, [dispatch, email, password]);
   return (
-    <Container style={styles.container}>
+    <Container>
       <HeaderBar name="Login" />
-      <Card transparent>
+      <Card>
         <CardItem>
           <Input
             placeholder="E-mail"
@@ -38,26 +38,10 @@ export default function LoginScreen() {
             onChangeText={text => setPassword(text)}
           />
         </CardItem>
-        <CardItem>
-          <Button onPress={handleSubmit} style={styles.button}>
-            <WelcomeAnimation />
-          </Button>
-        </CardItem>
+        <S.LoginButton onPress={handleSubmit} block>
+          <LoginButtonAnimation />
+        </S.LoginButton>
       </Card>
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#D55E5E',
-  },
-  label: {
-    color: 'white',
-  },
-});

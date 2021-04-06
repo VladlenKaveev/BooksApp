@@ -1,11 +1,9 @@
 import React from 'react';
-import {Container, Label, ListItem, Body, Right} from 'native-base';
-import {StyleSheet} from 'react-native';
-import {HeaderBar} from '../components';
-import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Container} from 'native-base';
+import {HeaderBar} from '../components/header';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../../auth/store/actions';
+import ProfileMenu from '../components/profile-menu';
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
@@ -13,73 +11,9 @@ export default function ProfileScreen() {
     dispatch(logOut());
   };
   return (
-    <Container style={styles.container}>
-      <LinearGradient colors={['#EEECFF', '#EEECFF', '#FFFFFF']}>
-        <HeaderBar name="Settings" />
-        <ListItem style={{paddingTop: 20}}>
-          <Icon name="user" size={16} color="#384F7D" />
-          <Body style={styles.body}>
-            <Label>Account</Label>
-          </Body>
-          <Right>
-            <Icon name="angle-right" size={16} color="#384F7D" />
-          </Right>
-        </ListItem>
-        <ListItem>
-          <Icon name="bell" size={16} color="#384F7D" />
-          <Body style={styles.body}>
-            <Label>Notifications</Label>
-          </Body>
-          <Right>
-            <Icon name="angle-right" size={16} color="#384F7D" />
-          </Right>
-        </ListItem>
-        <ListItem>
-          <Icon name="lock" size={16} color="#384F7D" />
-          <Body style={styles.body}>
-            <Label>Privacy</Label>
-          </Body>
-          <Right>
-            <Icon name="angle-right" size={16} color="#384F7D" />
-          </Right>
-        </ListItem>
-        <ListItem>
-          <Icon name="compass" size={16} color="#384F7D" />
-          <Body style={styles.body}>
-            <Label>Help Center</Label>
-          </Body>
-          <Right>
-            <Icon name="angle-right" size={16} color="#384F7D" />
-          </Right>
-        </ListItem>
-        <ListItem>
-          <Icon name="info-circle" size={16} color="#384F7D" />
-          <Body style={styles.body}>
-            <Label>General</Label>
-          </Body>
-          <Right>
-            <Icon name="angle-right" size={16} color="#384F7D" />
-          </Right>
-        </ListItem>
-        <ListItem onPress={() => handleSignOut()}>
-          <Icon name="user-o" size={16} color="#384F7D" />
-          <Body style={styles.body}>
-            <Label>Sign Out</Label>
-          </Body>
-          <Right>
-            <Icon name="angle-right" size={16} color="#384F7D" />
-          </Right>
-        </ListItem>
-      </LinearGradient>
+    <Container>
+      <HeaderBar name="Settings" />
+      <ProfileMenu handleOnPress={handleSignOut} />
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  body: {
-    paddingLeft: 8,
-  },
-});
