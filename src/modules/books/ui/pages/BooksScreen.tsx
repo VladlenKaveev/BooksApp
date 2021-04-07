@@ -19,6 +19,11 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import BooksListItem from '../components/books-list-item';
 import {SearchBar} from '../components/search-input';
 import * as S from './styles';
+import {Book} from '../../domain/interfaces/Book';
+
+type Props = {
+  item: Book;
+};
 
 //изменить тип navigation
 export default function BooksScreen({navigation}: any) {
@@ -68,7 +73,7 @@ export default function BooksScreen({navigation}: any) {
           isRefreshing={isRefreshing}
           onListEndReached={onListEndReached}
           onListRefresh={onListRefresh}
-          renderItem={({item}) => (
+          renderItem={({item}: Props) => (
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate('SelectedBook', {
@@ -77,6 +82,7 @@ export default function BooksScreen({navigation}: any) {
                   book_author: item.book_author,
                   description: item.description,
                   img_url: item.img_url,
+                  item: item,
                 })
               }>
               <BooksListItem item={item} />

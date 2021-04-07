@@ -1,9 +1,9 @@
 import {FlatList} from 'react-native';
 import React from 'react';
 import ProfileMenuItem from '../profile-menu-item';
-import {MenuHeadlines} from '../../../domain/interfaces/MenuHeadlines';
+import {Headlines} from '../../../domain/interfaces/MenuHeadlines';
 
-const MenuHeadlines: MenuHeadlines[] = [
+const MenuHeadlines: Headlines[] = [
   {id: 1, title: 'Account', icon: 'user'},
   {id: 2, title: 'Notifications', icon: 'bell'},
   {id: 3, title: 'Privacy', icon: 'lock'},

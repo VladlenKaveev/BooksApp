@@ -9,7 +9,7 @@ export class MyBooksService {
     private storageService: StorageService,
   ) {}
 
-  public async delete(id: number): Promise<Book[]> {
+  public async delete(id: number | string): Promise<Book[]> {
     const books: Book[] = await this.load().then(payload => {
       return payload;
     });

@@ -1,22 +1,21 @@
 import React, {useCallback} from 'react';
 import {Container, Card, CardItem, Item} from 'native-base';
 import {HeaderBar} from '../components/header';
-import RatingStar from '../components/RatingStar';
+import RatingStars from '../components/rating-stars';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useDispatch} from 'react-redux';
 import {addMyBook} from '../../store/my-books/actions';
-import {Book} from '../../domain/interfaces/Book';
 import {BookName, BookAuthor} from '../components/books-list-item/styles';
 import * as S from './styles';
 
 export default function SelectedBook({route}: any) {
-  const {id, book_name, book_author, description, img_url}: Book = route.params;
+  const {id, book_name, book_author, description, img_url, item} = route.params;
   const dispatch = useDispatch();
   const handleTakeBook = useCallback(() => {
     dispatch(addMyBook(route.params));
   }, [dispatch, route.params]);
   return (
-    <Container style={{flex: 1}}>
+    <Container>
       <HeaderBar name="Book" />
       <Card transparent>
         <CardItem>
@@ -38,13 +37,13 @@ export default function SelectedBook({route}: any) {
         <CardItem>
           <S.FullDescription>Full Synopsis</S.FullDescription>
         </CardItem>
-        <Item style={{marginVertical: 30}} />
-        <CardItem style={{alignSelf: 'center'}}>
-          <S.AddRaitingLabel>TAP TO ADD RATING</S.AddRaitingLabel>
-        </CardItem>
-        <CardItem style={{alignSelf: 'center'}}>
-          <RatingStar />
-        </CardItem>
+        <S.Line />
+        <S.AddRatingContainer>
+          <S.AddRatingLabel>TAP TO ADD RATING</S.AddRatingLabel>
+        </S.AddRatingContainer>
+        <S.RatingStarContainer>
+          <RatingStars item={item} />
+        </S.RatingStarContainer>
         <CardItem>
           <S.TakeBookButton onPress={handleTakeBook}>
             <S.TakeBookButtonLabel>TAKE A BOOK</S.TakeBookButtonLabel>

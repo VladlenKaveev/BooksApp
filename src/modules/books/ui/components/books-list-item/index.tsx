@@ -1,8 +1,8 @@
 import {CardItem} from 'native-base';
-import DisabledRatingStar from '../DisabledRatingStar';
 import React from 'react';
 import * as S from './styles';
 import {Book} from '../../../domain/interfaces/Book';
+import RatingStars from '../rating-stars';
 
 type Props = {
   item: Book;
@@ -22,7 +22,7 @@ const BooksListItem = ({item}: Props) => {
             ID: {item.id}
           </S.BookAuthor>
         </S.BookName>
-        <DisabledRatingStar />
+        <RatingStars item={item} disabled={true} />
       </CardItem>
     </S.BookCard>
   );

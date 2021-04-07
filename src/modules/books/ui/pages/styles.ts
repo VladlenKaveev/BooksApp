@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import {Button} from 'native-base';
+import {Button, Item, CardItem} from 'native-base';
 
 export const ResultsLabel = styled.Text`
   font-size: 13px;
@@ -20,7 +20,7 @@ export const Description = styled.Text`
   font-family: 'CircularStd-Book';
   color: #384f7d;
   opacity: 0.8;
-  line-height: 22;
+  line-height: 22px;
 `;
 
 export const FullDescription = styled.Text`
@@ -48,9 +48,22 @@ export const TakeBookButtonLabel = styled.Text`
   font-family: 'CircularStd-Medium';
 `;
 
-export const AddRaitingLabel = styled.Text`
+export const AddRatingLabel = styled.Text`
   color: #384f7d;
   opacity: 0.8;
   font-family: 'CircularStd-Medium';
   font-size: 12px;
+`;
+
+export const Line = styled(Item)`
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
+export const AddRatingContainer = styled(CardItem)`
+  justify-content: center;
+`;
+
+export const RatingStarContainer = styled(CardItem)`
+  align-self: center;
 `;
