@@ -3,14 +3,14 @@ import React from 'react';
 import {Book} from '../../../domain/interfaces/Book';
 import * as S from './styles';
 
-interface BooksListVariables {
+type Props = {
   books: Book[];
-  renderItem: ListRenderItem<Book>;
+  renderItem: ListRenderItem<unknown>;
   isLoading?: boolean;
   isRefreshing?: boolean;
-  // onListEndReached?: void; что за тип?
-  // onListRefresh?: void;
-}
+  onListEndReached?: () => void;
+  onListRefresh?: () => void;
+};
 
 export default function BooksList({
   books,
@@ -19,12 +19,12 @@ export default function BooksList({
   isRefreshing,
   onListEndReached,
   onListRefresh,
-}: BooksListVariables) {
+}: Props) {
   return (
     <S.FlatlistContainer
       data={books}
       renderItem={renderItem}
-      keyExtractor={item => item.id}
+      keyExtractor={(item: Book) => item.id}
       onEndReached={onListEndReached}
       refreshing={isRefreshing}
       onRefresh={onListRefresh}

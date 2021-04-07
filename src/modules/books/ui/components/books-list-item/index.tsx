@@ -2,9 +2,13 @@ import {CardItem} from 'native-base';
 import DisabledRatingStar from '../DisabledRatingStar';
 import React from 'react';
 import * as S from './styles';
+import {Book} from '../../../domain/interfaces/Book';
 
-//добавить тип
-const BooksListItem = ({item}) => {
+type Props = {
+  item: Book;
+};
+
+const BooksListItem = ({item}: Props) => {
   return (
     <S.BookCard>
       <CardItem>

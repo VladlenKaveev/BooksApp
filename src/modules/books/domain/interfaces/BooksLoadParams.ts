@@ -1,5 +1,5 @@
 export interface BooksLoadParams {
-  search: object;
+  search?: object;
   page: number;
   per_page: number;
 }
