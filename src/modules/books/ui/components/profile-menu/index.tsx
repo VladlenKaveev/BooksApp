@@ -1,9 +1,9 @@
 import {FlatList} from 'react-native';
 import React from 'react';
 import ProfileMenuItem from '../profile-menu-item';
-import {Book} from '../../../domain/interfaces/Book';
+import {MenuHeadlines} from '../../../domain/interfaces/MenuHeadlines';
 
-const MenuHeadlines = [
+const MenuHeadlines: MenuHeadlines[] = [
   {id: 1, title: 'Account', icon: 'user'},
   {id: 2, title: 'Notifications', icon: 'bell'},
   {id: 3, title: 'Privacy', icon: 'lock'},
@@ -12,9 +12,11 @@ const MenuHeadlines = [
   {id: 6, title: 'Sign Out', icon: 'user-o'},
 ];
 
-//сделать интерфейс или тип для item
+type Props = {
+  handleOnPress: () => void;
+};
 
-export default function ProfileMenu({handleOnPress}) {
+export default function ProfileMenu({handleOnPress}: Props) {
   return (
     <FlatList
       data={MenuHeadlines}
