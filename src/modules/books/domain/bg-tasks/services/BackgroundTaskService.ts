@@ -1,43 +1,39 @@
-import {BaseRestResource} from '@snap-alex/domain-js';
-import {BackgroundTaskOptions} from '../interfaces/BackgroundTaskOptions';
-import backgroundTaskResource from '../resources/BackgroundTaskResource';
 import {Book} from '../../interfaces/Book';
+import {TaskWatcher} from './TaskWatcher';
+import {BaseRestResource} from '@snap-alex/domain-js';
+import {TaskOptions} from '../interfaces/TaskOptions';
+import backgroundTaskResource from '../resources/BackgroundTaskResource';
+import {BooksLoadParams} from '../../interfaces/BooksLoadParams';
+
+enum TaskActions {
+  ActionOne = 'action_one',
+}
 
 export class BackgroundTaskService {
   constructor(private backgroundTaskResource: BaseRestResource) {}
 
-  private async createBgTask(): Promise<Book[]> {
-    const taskOptions: BackgroundTaskOptions = {
-      task_id: 1,
-      status: true,
-      success: false,
-    };
-    return new Promise((resolve, reject) => {
-      setTimeout(async () => {
-        if (taskOptions.status) {
-          taskOptions.success = true;
-          this.load(taskOptions).then(data => {
-            resolve(data.result);
-          });
-        } else {
-          setInterval(() => {
-            console.log('executing...');
-            //тут запрашиваем статус
-            //написать хелпер который изменит status
-          }, 5000);
-        }
+  public createTask(
+    actionName: TaskActions,
+    payload: BooksLoadParams,
+  ): Promise<TaskWatcher> {
+    //возвращает watcher
+    return this.backgroundTaskResource
+      .create({actionName, payload})
+      .then((task: TaskOptions) => {
+        //передаем task в watcher
+        const taskWatcher = new TaskWatcher(task);
+        //старт наблюдения
+        taskWatcher.startWatching();
+        return taskWatcher;
       });
-    });
   }
 
-  public async getResult(): Promise<Book[]> {
-    return await this.createBgTask().then(result => {
-      return result;
+  public async loadData(): Promise<Book[]> {
+    const taskWatcher = await this.createTask(TaskActions.ActionOne, {
+      page: 1,
+      per_page: 20,
     });
-  }
-
-  private load(options: BackgroundTaskOptions): Promise<Book[]> {
-    return this.backgroundTaskResource.get(options);
+    return await taskWatcher.watchResult;
   }
 }
 
