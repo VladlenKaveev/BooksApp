@@ -4,13 +4,12 @@ import {useDispatch} from 'react-redux';
 import {HeaderBar} from '../../../books/ui/components/header';
 import {logIn} from '../../store/actions';
 import {AuthCredentials} from '../../domain/interfaces/AuthCredentials';
-import LoginButtonAnimation from '../components/LoginButtonAnimation';
-import * as S from './styles';
+import UdButton from '../../../ud-ui/components/ud-button';
 
 export default function LoginScreen() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
   const handleSubmit = useCallback(() => {
     const credentials: AuthCredentials = {
       email: email,
@@ -38,9 +37,13 @@ export default function LoginScreen() {
             onChangeText={text => setPassword(text)}
           />
         </CardItem>
-        <S.LoginButton onPress={handleSubmit} block>
-          <LoginButtonAnimation />
-        </S.LoginButton>
+        <CardItem>
+          <UdButton
+            variant="primary"
+            title="Login Button"
+            onPress={handleSubmit}
+          />
+        </CardItem>
       </Card>
     </Container>
   );
