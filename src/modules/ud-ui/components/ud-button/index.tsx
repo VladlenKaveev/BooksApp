@@ -43,12 +43,13 @@ export type Props = {
   variant?: string;
   title: string;
   onPress?: () => void;
+  testID?: string;
 };
 
-const UdButton = ({variant, title, onPress}: Props) => {
+const UdButton = ({variant, title, onPress, testID}: Props) => {
   return (
     <ThemeProvider theme={theme}>
-      <S.CustomButton variant={variant} onPress={onPress}>
+      <S.CustomButton variant={variant} onPress={onPress} testID={testID}>
         <S.CustomLabel>{title}</S.CustomLabel>
       </S.CustomButton>
     </ThemeProvider>

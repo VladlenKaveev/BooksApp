@@ -63,11 +63,11 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "setupFiles": [
-      "./jest.setup.js",
+      "./jest.mock.js",
       "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?@react-native|react-native|@react-navigation|native-base-shoutem-theme|native-base|@codler|react-redux)"
+      "node_modules/(?!(jest-)?@react-native|react-native|@react-navigation|native-base-shoutem-theme|native-base|@codler)"
     ],
     "moduleFileExtensions": [
       "ts",

@@ -44,6 +44,7 @@ export default function LoginScreen() {
             variant="primary"
             title="Login Button"
             onPress={handleSubmit}
+            testID="loginbutton"
           />
         </CardItem>
       </Card>
