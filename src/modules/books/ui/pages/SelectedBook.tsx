@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Container, Card, CardItem, Item} from 'native-base';
+import {Container, Card, CardItem} from 'native-base';
 import {HeaderBar} from '../components/header';
 import RatingStars from '../components/rating-stars';
 import Icon from 'react-native-vector-icons/FontAwesome5';

@@ -20,17 +20,18 @@ import BooksListItem from '../components/books-list-item';
 import {SearchBar} from '../components/search-input';
 import * as S from './styles';
 import {Book} from '../../domain/interfaces/Book';
+import {StackScreenProps} from '@react-navigation/stack';
 
 type Props = {
   item: Book;
+  navigation: StackScreenProps<any>;
 };
 
-//изменить тип navigation
-export default function BooksScreen({navigation}: any) {
+export default function BooksScreen({navigation}: Props) {
+  const dispatch = useDispatch();
   const books: any = useSelector(booksSelector);
   const isLoading: boolean = useSelector(loadingSelector);
   const [searchText, setSearchText] = useState('');
-  const dispatch = useDispatch();
   const isRefreshing: boolean = useSelector(refreshingSelector);
   const onListEndReached = useCallback(() => {
     if (!isLoading && !isRefreshing) {
@@ -52,6 +53,7 @@ export default function BooksScreen({navigation}: any) {
   const onSearchEndEditing = useCallback(() => {
     dispatch(searchAuthor(searchText));
   }, [searchText, dispatch]);
+
   useEffect(() => {
     dispatch(loadBooks());
   }, [dispatch]);

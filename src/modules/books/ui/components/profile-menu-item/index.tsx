@@ -2,11 +2,11 @@ import {Label, ListItem, Right} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import * as S from './styles';
-import {MenuHeadlines} from '../../../domain/interfaces/MenuHeadlines';
+import {Headlines} from '../../../domain/interfaces/MenuHeadlines';
 
 type Props = {
   handleOnPress: () => void;
-  item: MenuHeadlines;
+  item: Headlines;
 };
 
 const ProfileMenuItem = ({item, handleOnPress}: Props) => {

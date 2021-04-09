@@ -3,8 +3,8 @@ import * as S from './styles';
 
 interface SearchBarVariables {
   searchText: string;
-  // onSearchTextChanged: void;
-  // onSearchEndEditing: void;
+  onSearchTextChanged: (text: string) => void;
+  onSearchEndEditing: () => void;
 }
 
 export const SearchBar = ({

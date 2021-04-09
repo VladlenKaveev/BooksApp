@@ -42,9 +42,9 @@ export default function LoginScreen() {
         <CardItem>
           <UdButton
             variant="primary"
-            title="Login Button"
+            title="LOGIN"
             onPress={handleSubmit}
-            testID="loginbutton"
+            testID="login_button"
           />
         </CardItem>
       </Card>

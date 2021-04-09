@@ -4,7 +4,7 @@ import LoginScreen from './index';
 import {Provider} from 'react-redux';
 import store from '../../../../../store';
 
-it('Testing Login component', async () => {
+it('Testing Login Component', async () => {
   const email = 'example@mail.ru';
   const password = 'example';
   const {getByTestId} = render(
@@ -12,10 +12,9 @@ it('Testing Login component', async () => {
       <LoginScreen />
     </Provider>,
   );
-
   const emailInput = getByTestId('email');
   const passwordInput = getByTestId('password');
-  const loginButton = getByTestId('loginbutton');
+  const loginButton = getByTestId('login_button');
   await waitFor(() => {
     fireEvent.changeText(emailInput, email);
     fireEvent.changeText(passwordInput, password);
