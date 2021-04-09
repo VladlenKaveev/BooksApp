@@ -4,6 +4,7 @@ import {BaseRestResource} from '@snap-alex/domain-js';
 import {TaskOptions} from '../interfaces/TaskOptions';
 import backgroundTaskResource from '../resources/BackgroundTaskResource';
 import {BooksLoadParams} from '../../interfaces/BooksLoadParams';
+import {RequestResponse} from '../interfaces/RequestResponse';
 
 enum TaskActions {
   ActionOne = 'action_one',
@@ -12,23 +13,24 @@ enum TaskActions {
 export class BackgroundTaskService {
   constructor(private backgroundTaskResource: BaseRestResource) {}
 
-  public createTask(
+  public async createTask(
     actionName: TaskActions,
     payload: BooksLoadParams,
   ): Promise<TaskWatcher> {
-    //возвращает watcher
     return this.backgroundTaskResource
       .create({actionName, payload})
       .then((task: TaskOptions) => {
-        //передаем task в watcher
         const taskWatcher = new TaskWatcher(task);
-        //старт наблюдения
         taskWatcher.startWatching();
         return taskWatcher;
       });
   }
 
-  public async loadData(): Promise<Book[]> {
+  public requestResult(task: TaskOptions): Promise<RequestResponse> {
+    return this.backgroundTaskResource.create(task);
+  }
+
+  public async loadTaskResult(): Promise<Book[] | Error> {
     const taskWatcher = await this.createTask(TaskActions.ActionOne, {
       page: 1,
       per_page: 20,

@@ -4,6 +4,7 @@ import bookRepository from '../../domain/rest/repositories/BookRepository';
 import {changeID} from '../../domain/helpers/ChangeBooksID';
 import {pageParamsSelector} from './selectors';
 import bookService, {BooksLoadParams} from '../../domain/services/BookService';
+import backgroundTaskService from '../../domain/bg-tasks/services/BackgroundTaskService';
 
 const defaultLoadParams = {
   page: 1,
@@ -33,17 +34,17 @@ export const loadNextPage = createAsyncThunk<{
 
 export const refreshBooks = createAsyncThunk<Book[] | null>(
   'books/refreshBooks',
-  async () => {
+  () => {
     return bookRepository.load(defaultLoadParams);
     // return bookService.load(defaultLoadParams);
   },
 );
 
-export const loadBooks = createAsyncThunk<Book[] | null>(
+export const loadBooks = createAsyncThunk<Book[] | null | Error>(
   'books/loadBooks',
-  async () => {
-    return bookRepository.load(defaultLoadParams);
+  () => {
+    // return bookRepository.load(defaultLoadParams);
     // return bookService.load(defaultLoadParams);
-    // return backgroundTaskService.loadData();
+    return backgroundTaskService.loadTaskResult();
   },
 );
