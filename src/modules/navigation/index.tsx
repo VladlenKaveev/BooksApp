@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BooksScreen from '../books/ui/pages/BooksScreen';
 import MyBooksScreen from '../books/ui/pages/MyBooksScreen';
 import ProfileScreen from '../books/ui/pages/ProfileScreen';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectedBook from '../books/ui/pages/SelectedBook';
-import LoginScreen from '../auth/ui/pages/LoginScreen';
-import {useDispatch, useSelector} from 'react-redux';
+import LoginScreen from '../auth/ui/pages/login';
 import LoadingIndicator from '../books/ui/components/LoadingIndicator';
 import {Container} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {checkLogin} from '../auth/store/actions';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   isAuthLoadingSelector,
   isUserLoginSelector,

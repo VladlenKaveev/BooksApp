@@ -1,10 +1,10 @@
 import React, {useCallback, useState} from 'react';
 import {Card, CardItem, Input, Container} from 'native-base';
 import {useDispatch} from 'react-redux';
-import {HeaderBar} from '../../../books/ui/components/header';
-import {logIn} from '../../store/actions';
-import {AuthCredentials} from '../../domain/interfaces/AuthCredentials';
-import UdButton from '../../../ud-ui/components/ud-button';
+import {HeaderBar} from '../../../../books/ui/components/header';
+import {logIn} from '../../../store/actions';
+import {AuthCredentials} from '../../../domain/interfaces/AuthCredentials';
+import UdButton from '../../../../ud-ui/components/ud-button';
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ export default function LoginScreen() {
       <Card>
         <CardItem>
           <Input
+            testID="email"
             placeholder="E-mail"
             value={email}
             onChangeText={text => {
@@ -32,6 +33,7 @@ export default function LoginScreen() {
         </CardItem>
         <CardItem>
           <Input
+            testID="password"
             value={password}
             placeholder="Password"
             onChangeText={text => setPassword(text)}
