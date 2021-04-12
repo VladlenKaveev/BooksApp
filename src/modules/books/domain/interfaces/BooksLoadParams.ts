@@ -1,5 +1,9 @@
 export interface BooksLoadParams {
-  search?: object;
+  search?: SearchText;
   page: number;
   per_page: number;
 }
+
+export type SearchText = {
+  searchText: string;
+};

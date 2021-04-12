@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Container, Card, CardItem} from 'native-base';
 import {HeaderBar} from '../components/header';
 import RatingStars from '../components/rating-stars';
@@ -9,8 +9,20 @@ import {BookName, BookAuthor} from '../components/books-list-item/styles';
 import * as S from './styles';
 
 export default function SelectedBook({route}: any) {
-  const {id, book_name, book_author, description, img_url, item} = route.params;
   const dispatch = useDispatch();
+  const {id, book_name, book_author, description, img_url, item} = route.params;
+  const [lengthMore, setLengthMore] = useState(false);
+  const [textShown, setTextShown] = useState(false);
+  const numberOfLines = 2;
+  const onTextLayout = useCallback(
+    e => {
+      setLengthMore(e.nativeEvent.lines.length >= numberOfLines);
+    },
+    [setLengthMore],
+  );
+  const toggleNumberOfLines = () => {
+    setTextShown(!textShown);
+  };
   const handleTakeBook = useCallback(() => {
     dispatch(addMyBook(route.params));
   }, [dispatch, route.params]);
@@ -32,10 +44,18 @@ export default function SelectedBook({route}: any) {
           </BookName>
         </CardItem>
         <CardItem>
-          <S.Description>{description}</S.Description>
+          <S.Description
+            onTextLayout={onTextLayout}
+            numberOfLines={textShown ? undefined : numberOfLines}>
+            {description}
+          </S.Description>
         </CardItem>
         <CardItem>
-          <S.FullDescription>Full Synopsis</S.FullDescription>
+          {lengthMore ? (
+            <S.FullDescription onPress={toggleNumberOfLines}>
+              {textShown ? 'Hide' : 'Full synopsis'}
+            </S.FullDescription>
+          ) : null}
         </CardItem>
         <S.Line />
         <S.AddRatingContainer>

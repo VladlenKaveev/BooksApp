@@ -5,6 +5,7 @@ import {changeID} from '../../domain/helpers/ChangeBooksID';
 import {pageParamsSelector} from './selectors';
 import bookService, {BooksLoadParams} from '../../domain/services/BookService';
 import backgroundTaskService from '../../domain/bg-tasks/services/BackgroundTaskService';
+import {SearchText} from '../../domain/interfaces/BooksLoadParams';
 
 const defaultLoadParams = {
   page: 1,
@@ -14,9 +15,9 @@ const defaultLoadParams = {
 export const searchAuthor = createAsyncThunk<{
   books: Book[] | null;
   loadParams: BooksLoadParams | null;
-}>('books/searchAuthor', async searchText => {
+}>('books/searchAuthor', async (searchText: SearchText) => {
   const loadParams = {search: {searchText}};
-  return bookService.load(loadParams).then(books => {
+  return await bookService.load(loadParams).then(books => {
     return books.data;
   });
 });
@@ -27,7 +28,7 @@ export const loadNextPage = createAsyncThunk<{
 }>('books/loadNextPage', async (_, thunkAPI) => {
   const currentLoadParams = pageParamsSelector(thunkAPI.getState());
   const newLoadParams = {...currentLoadParams, page: currentLoadParams + 1};
-  return bookRepository.load(newLoadParams).then(books => {
+  return await bookRepository.load(newLoadParams).then(books => {
     return {books: changeID(books), loadParams: newLoadParams};
   });
 });

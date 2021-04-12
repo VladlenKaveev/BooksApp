@@ -9,19 +9,18 @@ import ProfileScreen from '../books/ui/pages/ProfileScreen';
 import SelectedBook from '../books/ui/pages/SelectedBook';
 import LoginScreen from '../auth/ui/pages/login';
 import LoadingIndicator from '../books/ui/components/LoadingIndicator';
-import {Container} from 'native-base';
-import {StyleSheet} from 'react-native';
 import {checkLogin} from '../auth/store/actions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   isAuthLoadingSelector,
   isUserLoginSelector,
 } from '../auth/store/selectors';
+import * as S from './styles';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function Navigation() {
+export default function Navigation() {
   const dispatch = useDispatch();
   const isAuthLoading: boolean = useSelector(isAuthLoadingSelector);
   const isUserLogin: boolean = useSelector(isUserLoginSelector);
@@ -30,9 +29,9 @@ function Navigation() {
   }, [dispatch]);
   if (isAuthLoading) {
     return (
-      <Container style={styles.loading}>
+      <S.LoadingContainer>
         <LoadingIndicator />
-      </Container>
+      </S.LoadingContainer>
     );
   } else {
     return (
@@ -95,11 +94,3 @@ function BottomTab() {
     </Tab.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  loading: {
-    justifyContent: 'center',
-  },
-});
-
-export default Navigation;

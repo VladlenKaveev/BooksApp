@@ -24,7 +24,7 @@ export default function BooksList({
     <S.FlatlistContainer
       data={books}
       renderItem={renderItem}
-      keyExtractor={item => item.id}
+      keyExtractor={(item: Book) => item.id}
       onEndReached={onListEndReached}
       refreshing={isRefreshing}
       onRefresh={onListRefresh}
