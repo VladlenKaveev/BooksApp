@@ -3,8 +3,8 @@ import {TaskWatcher} from './TaskWatcher';
 import {BaseRestResource} from '@snap-alex/domain-js';
 import {TaskOptions} from '../interfaces/TaskOptions';
 import backgroundTaskResource from '../resources/BackgroundTaskResource';
-import {BooksLoadParams} from '../../interfaces/BooksLoadParams';
 import {RequestResponse} from '../interfaces/RequestResponse';
+import {BooksLoadParams} from '../../services/BookService';
 
 enum TaskActions {
   ActionOne = 'action_one',

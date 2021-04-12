@@ -20,11 +20,10 @@ import BooksListItem from '../components/books-list-item';
 import {SearchBar} from '../components/search-input';
 import * as S from './styles';
 import {Book} from '../../domain/interfaces/Book';
-import {StackScreenProps} from '@react-navigation/stack';
 
 type Props = {
   item: Book;
-  navigation: StackScreenProps<any>;
+  navigation: any;
 };
 
 export default function BooksScreen({navigation}: Props) {

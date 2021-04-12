@@ -5,7 +5,11 @@ import Config from 'react-native-config';
 export type BooksLoadParams = {
   page?: string | number;
   per_page?: string | number;
-  search?: object;
+  search?: SearchText;
+};
+
+type SearchText = {
+  searchText: string;
 };
 
 export class BookService {
@@ -22,7 +26,9 @@ export class BookService {
   }
 
   public load(params?: BooksLoadParams): Promise<Book[]> {
-    return this.clientInstance.get(this.RELATIVE_URL, {params});
+    return this.clientInstance.get(this.RELATIVE_URL, {params}).then(data => {
+      return data.data;
+    });
   }
 }
 
