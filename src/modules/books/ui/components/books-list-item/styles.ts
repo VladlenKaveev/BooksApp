@@ -26,3 +26,8 @@ export const BookAuthor = styled.Text`
   font-family: 'CircularStd-Medium';
   opacity: 0.7;
 `;
+
+export const RatingStarContainer = styled.View`
+  flex: 1;
+  align-self: flex-end;
+`;

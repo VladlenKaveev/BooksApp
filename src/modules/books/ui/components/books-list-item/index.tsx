@@ -22,7 +22,9 @@ const BooksListItem = ({item}: Props) => {
             ID: {item.id}
           </S.BookAuthor>
         </S.BookName>
-        <RatingStars item={item} disabled={true} />
+        <S.RatingStarContainer>
+          <RatingStars item={item} disabled={true} />
+        </S.RatingStarContainer>
       </CardItem>
     </S.BookCard>
   );
