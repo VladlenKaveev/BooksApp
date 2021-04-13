@@ -19,6 +19,7 @@
 		8353BEFA5F12425FB6D8F372 /* CircularStd-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCA5A97E42264601A962B711 /* CircularStd-Black.ttf */; };
 		8890BD3786884D6B999BDDE0 /* CircularStd-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B30D683BEE46DA8E0D1A53 /* CircularStd-Medium.ttf */; };
 		944B63C2CA0F44DE9396D04E /* CircularStd-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C81531B47340208CAE8C0C /* CircularStd-MediumItalic.ttf */; };
+		BF4F4FEC2625E41400086FAA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4F4FEB2625E41400086FAA /* BootSplash.storyboard */; };
 		BFF8F534261A255200B243DA /* libswiftWebKit.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF8F533261A255200B243DA /* libswiftWebKit.tbd */; };
 		C62507392AFC44D9D3178022 /* libPods-BooksApp-BooksAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E6BF3712AB16F1372EE54F /* libPods-BooksApp-BooksAppTests.a */; };
 		E126790B1BFA421BBF093FB4 /* CircularStd-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CF32B0591417B9AE6B163 /* CircularStd-BlackItalic.ttf */; };
@@ -56,6 +57,7 @@
 		A1F4076A8F713F11F1E76CC9 /* Pods-BooksApp-BooksAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BooksApp-BooksAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BooksApp-BooksAppTests/Pods-BooksApp-BooksAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A257FEF60BB38768877712B0 /* Pods-BooksApp-BooksAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BooksApp-BooksAppTests.release.xcconfig"; path = "Target Support Files/Pods-BooksApp-BooksAppTests/Pods-BooksApp-BooksAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B53B2061190444238387736D /* CircularStd-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-Book.ttf"; path = "../assets/fonts/CircularStd-Book.ttf"; sourceTree = "<group>"; };
+		BF4F4FEB2625E41400086FAA /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = BooksApp/BootSplash.storyboard; sourceTree = "<group>"; };
 		BFF8F533261A255200B243DA /* libswiftWebKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftWebKit.tbd; path = usr/lib/swift/libswiftWebKit.tbd; sourceTree = SDKROOT; };
 		C51CF32B0591417B9AE6B163 /* CircularStd-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-BlackItalic.ttf"; path = "../assets/fonts/CircularStd-BlackItalic.ttf"; sourceTree = "<group>"; };
 		CE2EFC5B88D14902865812D6 /* CircularStd-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-BoldItalic.ttf"; path = "../assets/fonts/CircularStd-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
+				BF4F4FEB2625E41400086FAA /* BootSplash.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = BooksApp;
@@ -279,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				BF4F4FEC2625E41400086FAA /* BootSplash.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				8353BEFA5F12425FB6D8F372 /* CircularStd-Black.ttf in Resources */,
 				E126790B1BFA421BBF093FB4 /* CircularStd-BlackItalic.ttf in Resources */,
