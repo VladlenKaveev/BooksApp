@@ -18,16 +18,17 @@ import {
 import LoadingIndicator from '../components/LoadingIndicator';
 import BooksListItem from '../components/books-list-item';
 import {SearchBar} from '../components/search-input';
-import * as S from './styles';
 import {Book} from '../../domain/interfaces/Book';
+import * as S from './styles';
+import BottomSheetTab from '../components/bottom-sheet';
 
 type Props = {
   item: Book;
-  navigation: any;
 };
 
-export default function BooksScreen({navigation}: Props) {
+export default function BooksScreen() {
   const dispatch = useDispatch();
+  const [sheetItem, setSheetItem] = useState(null);
   const books: any = useSelector(booksSelector);
   const isLoading: boolean = useSelector(loadingSelector);
   const [searchText, setSearchText] = useState('');
@@ -52,7 +53,7 @@ export default function BooksScreen({navigation}: Props) {
   const onSearchEndEditing = useCallback(() => {
     dispatch(searchAuthor(searchText));
   }, [searchText, dispatch]);
-
+  const sheetRef = React.useRef(null);
   useEffect(() => {
     dispatch(loadBooks());
   }, [dispatch]);
@@ -68,28 +69,25 @@ export default function BooksScreen({navigation}: Props) {
       {isLoading ? (
         <LoadingIndicator />
       ) : (
-        <BooksList
-          books={books}
-          isLoading={isLoading}
-          isRefreshing={isRefreshing}
-          onListEndReached={onListEndReached}
-          onListRefresh={onListRefresh}
-          renderItem={({item}: Props) => (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('SelectedBook', {
-                  id: item.id,
-                  book_name: item.book_name,
-                  book_author: item.book_author,
-                  description: item.description,
-                  img_url: item.img_url,
-                  item: item,
-                })
-              }>
-              <BooksListItem item={item} />
-            </TouchableOpacity>
-          )}
-        />
+        <>
+          <BooksList
+            books={books}
+            isLoading={isLoading}
+            isRefreshing={isRefreshing}
+            onListEndReached={onListEndReached}
+            onListRefresh={onListRefresh}
+            renderItem={({item}: Props) => (
+              <TouchableOpacity
+                onPress={() => {
+                  setSheetItem(item);
+                  sheetRef.current?.snapTo(0);
+                }}>
+                <BooksListItem item={item} />
+              </TouchableOpacity>
+            )}
+          />
+          <BottomSheetTab sheetRef={sheetRef} item={sheetItem} />
+        </>
       )}
     </Container>
   );
