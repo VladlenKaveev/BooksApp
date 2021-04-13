@@ -20,7 +20,7 @@ export class MyBooksService {
     return filtered;
   }
 
-  public async add(book: Book): Promise<Book[]> {
+  public async add(book: Book | null): Promise<Book[]> {
     const books = await this.load().then(payload => {
       if (payload == null) {
         return null;
@@ -29,7 +29,9 @@ export class MyBooksService {
       }
     });
     if (Array.isArray(books)) {
-      books.push(book);
+      if (book) {
+        books.push(book);
+      }
       await this.set(books);
     } else {
       await this.set(new Array(book));
@@ -49,7 +51,7 @@ export class MyBooksService {
     return this.storageService.getData(this.storageKey);
   }
 
-  private set(value: Book[]): Promise<Book[]> {
+  private set(value: (Book | null)[]): Promise<Book[]> {
     return this.storageService.storeData(this.storageKey, value);
   }
 }

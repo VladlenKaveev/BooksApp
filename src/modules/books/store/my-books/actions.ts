@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Book} from '../../domain/interfaces/Book';
 import myBooksService from '../../domain/services/MyBooksService';
 
-export const addMyBook = createAsyncThunk<Book[] | null, Book>(
+export const addMyBook = createAsyncThunk<Book[] | null, Book | null>(
   'mybooks/addBook',
   async book => {
     return myBooksService.add(book);

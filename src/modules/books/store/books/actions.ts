@@ -6,7 +6,7 @@ import {pageParamsSelector} from './selectors';
 import bookService, {BooksLoadParams} from '../../domain/services/BookService';
 import backgroundTaskService from '../../domain/bg-tasks/services/BackgroundTaskService';
 
-const defaultLoadParams = {
+const defaultLoadParams: BooksLoadParams = {
   page: 1,
   per_page: 20,
 };

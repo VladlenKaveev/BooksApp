@@ -4,12 +4,12 @@ import ProfileMenuItem from '../profile-menu-item';
 import {Headlines} from '../../../domain/interfaces/MenuHeadlines';
 
 const MenuHeadlines: Headlines[] = [
-  {id: 1, title: 'Account', icon: 'user'},
-  {id: 2, title: 'Notifications', icon: 'bell'},
-  {id: 3, title: 'Privacy', icon: 'lock'},
-  {id: 4, title: 'Help Center', icon: 'compass'},
-  {id: 5, title: 'General', icon: 'info-circle'},
-  {id: 6, title: 'Sign Out', icon: 'user-o'},
+  {id: '1', title: 'Account', icon: 'user'},
+  {id: '2', title: 'Notifications', icon: 'bell'},
+  {id: '3', title: 'Privacy', icon: 'lock'},
+  {id: '4', title: 'Help Center', icon: 'compass'},
+  {id: '5', title: 'General', icon: 'info-circle'},
+  {id: '6', title: 'Sign Out', icon: 'user-o'},
 ];
 
 type Props = {
@@ -23,7 +23,7 @@ export default function ProfileMenu({handleOnPress}: Props) {
       renderItem={({item}) => (
         <ProfileMenuItem handleOnPress={handleOnPress} item={item} />
       )}
-      keyExtractor={item => item.id}
+      keyExtractor={(item: Headlines) => item.id}
     />
   );
 }

@@ -10,7 +10,6 @@ export default function ProfileScreen() {
   const handleSignOut = useCallback(() => {
     dispatch(logOut());
   }, [dispatch]);
-
   return (
     <Container>
       <HeaderBar name="Settings" />
