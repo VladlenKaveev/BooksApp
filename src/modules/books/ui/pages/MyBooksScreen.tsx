@@ -11,7 +11,7 @@ import BooksListItem from '../components/books-list-item';
 import {useTranslation} from 'react-i18next';
 
 export default function MyBooksScreen() {
-  const {t} = useTranslation();
+  const {t} = useTranslation('Pages');
   const dispatch = useDispatch();
   const mybooks = useSelector(myBooksSelector);
   const isLoading = useSelector(loadingSelector);

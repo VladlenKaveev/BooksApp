@@ -28,7 +28,7 @@ type Props = {
 };
 
 export default function BooksScreen() {
-  const {t} = useTranslation();
+  const {t} = useTranslation('Pages');
   const dispatch = useDispatch();
   const [sheetItem, setSheetItem] = useState(null);
   const books: any = useSelector(booksSelector);

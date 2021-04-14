@@ -67,3 +67,10 @@ export const AddRatingContainer = styled(CardItem)`
 export const RatingStarContainer = styled(CardItem)`
   align-self: center;
 `;
+
+export const ChangeLanguageButton = styled(Button)`
+  width: 90%;
+  align-self: center;
+  justify-content: center;
+  background-color: #6790fb;
+`;

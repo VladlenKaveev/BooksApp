@@ -1,8 +1,22 @@
 {
-  "translation": {
+  "Pages": {
     "Books": "Books",
     "MyBooks": "My Books",
     "Profile": "Profile",
-    "Results": "RESULTS"
+    "Login": "Login",
+    "Results": "RESULTS",
+    "English": "English",
+    "LoginButton": "LOGIN"
+  },
+  "Components": {
+    "SearchBook": "Search book"
+  },
+  "ProfileMenu": {
+    "Account": "Account",
+    "Notifications": "Notifications",
+    "Privacy": "Privacy",
+    "HelpCenter": "Help Center",
+    "General": "General",
+    "SignOut": "Sign Out"
   }
 }

@@ -1,8 +1,22 @@
 {
-  "translation": {
+  "Pages": {
     "Books": "Книги",
     "MyBooks": "Мои книги",
     "Profile": "Профиль",
-    "Results": "РЕЗУЛЬТАТ"
+    "Login": "Вход",
+    "Results": "РЕЗУЛЬТАТ",
+    "English": "Английский",
+    "LoginButton": "Вход в систему"
+  },
+  "Components": {
+    "SearchBook": "Поиск книги"
+  },
+  "ProfileMenu" : {
+    "Account": "Аккаунт",
+    "Notifications": "Уведомления",
+    "Privacy": "Приватность",
+    "HelpCenter": "Служба поддержки",
+    "General": "Основные",
+    "SignOut": "Выход из системы"
   }
 }

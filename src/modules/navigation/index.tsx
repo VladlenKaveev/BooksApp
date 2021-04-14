@@ -23,6 +23,7 @@ const Stack = createStackNavigator();
 
 export default function Navigation() {
   const dispatch = useDispatch();
+  const {t} = useTranslation('Pages');
   const isAuthLoading: boolean = useSelector(isAuthLoadingSelector);
   const isUserLogin: boolean = useSelector(isUserLoginSelector);
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function Navigation() {
 }
 
 function BottomTab() {
-  const {t} = useTranslation();
+  const {t} = useTranslation('Pages');
   return (
     <Tab.Navigator>
       <Tab.Screen

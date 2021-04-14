@@ -5,8 +5,10 @@ import {HeaderBar} from '../../../../books/ui/components/header';
 import {logIn} from '../../../store/actions';
 import {AuthCredentials} from '../../../domain/interfaces/AuthCredentials';
 import UdButton from '../../../../ud-ui/components/ud-button';
+import {useTranslation} from 'react-i18next';
 
 export default function LoginScreen() {
+  const {t} = useTranslation('Pages');
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +21,7 @@ export default function LoginScreen() {
   }, [dispatch, email, password]);
   return (
     <Container>
-      <HeaderBar name="Login" />
+      <HeaderBar name={t('Login')} />
       <Card>
         <CardItem>
           <Input
@@ -42,7 +44,7 @@ export default function LoginScreen() {
         <CardItem>
           <UdButton
             variant="primary"
-            title="LOGIN"
+            title={t('LoginButton')}
             onPress={handleSubmit}
             testID="login_button"
           />
