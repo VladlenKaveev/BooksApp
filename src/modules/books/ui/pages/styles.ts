@@ -72,5 +72,12 @@ export const ChangeLanguageButton = styled(Button)`
   width: 90%;
   align-self: center;
   justify-content: center;
-  background-color: #6790fb;
+  background-color: #d55e5e;
+  margin: 5px;
+`;
+
+export const ChangeLanguageButtonLabel = styled.Text`
+  color: white;
+  font-size: 14px;
+  font-family: 'CircularStd-Medium';
 `;

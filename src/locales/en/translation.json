@@ -6,7 +6,8 @@
     "Login": "Login",
     "Results": "RESULTS",
     "English": "English",
-    "LoginButton": "LOGIN"
+    "LoginButton": "LOGIN",
+    "Russia": "Russia"
   },
   "Components": {
     "SearchBook": "Search book"

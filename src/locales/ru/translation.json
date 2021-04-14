@@ -6,7 +6,8 @@
     "Login": "Вход",
     "Results": "РЕЗУЛЬТАТ",
     "English": "Английский",
-    "LoginButton": "Вход в систему"
+    "LoginButton": "Вход в систему",
+    "Russia": "Русский"
   },
   "Components": {
     "SearchBook": "Поиск книги"
