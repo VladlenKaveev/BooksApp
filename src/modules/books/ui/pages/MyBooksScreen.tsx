@@ -8,8 +8,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import LoadingIndicator from '../components/LoadingIndicator';
 import BooksList from '../components/books-list';
 import BooksListItem from '../components/books-list-item';
+import {useTranslation} from 'react-i18next';
 
 export default function MyBooksScreen() {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   const mybooks = useSelector(myBooksSelector);
   const isLoading = useSelector(loadingSelector);
@@ -18,7 +20,7 @@ export default function MyBooksScreen() {
   }, [dispatch]);
   return (
     <Container>
-      <HeaderBar name="My Books" />
+      <HeaderBar name={t('MyBooks')} />
       {isLoading ? (
         <LoadingIndicator />
       ) : (

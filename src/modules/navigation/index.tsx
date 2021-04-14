@@ -16,6 +16,7 @@ import {
   isUserLoginSelector,
 } from '../auth/store/selectors';
 import * as S from './styles';
+import {useTranslation} from 'react-i18next';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -66,24 +67,25 @@ export default function Navigation() {
 }
 
 function BottomTab() {
+  const {t} = useTranslation();
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Books"
+        name={t('Books')}
         component={BooksScreen}
         options={{
           tabBarIcon: () => <Icon name="home" size={23} color="#384F7D" />,
         }}
       />
       <Tab.Screen
-        name="MyBooks"
+        name={t('MyBooks')}
         component={MyBooksScreen}
         options={{
           tabBarIcon: () => <Icon name="book" size={23} color="#384F7D" />,
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={t('Profile')}
         component={ProfileScreen}
         options={{
           tabBarIcon: () => (

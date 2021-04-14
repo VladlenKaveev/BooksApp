@@ -21,12 +21,14 @@ import {SearchBar} from '../components/search-input';
 import {Book} from '../../domain/interfaces/Book';
 import * as S from './styles';
 import BottomSheetTab from '../components/bottom-sheet';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   item: Book;
 };
 
 export default function BooksScreen() {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   const [sheetItem, setSheetItem] = useState(null);
   const books: any = useSelector(booksSelector);
@@ -59,13 +61,13 @@ export default function BooksScreen() {
   }, [dispatch]);
   return (
     <Container>
-      <HeaderBar name="Books" />
+      <HeaderBar name={t('Books')} />
       <SearchBar
         searchText={searchText}
         onSearchEndEditing={onSearchEndEditing}
         onSearchTextChanged={onSearchTextChanged}
       />
-      <S.ResultsLabel>RESULTS</S.ResultsLabel>
+      <S.ResultsLabel>{t('Results')}</S.ResultsLabel>
       {isLoading ? (
         <LoadingIndicator />
       ) : (
