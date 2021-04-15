@@ -22,6 +22,7 @@ import {Book} from '../../domain/interfaces/Book';
 import * as S from './styles';
 import BottomSheetTab from '../components/bottom-sheet';
 import {useTranslation} from 'react-i18next';
+import flurryService from '../../../analytics/domain/flurry';
 
 type Props = {
   item: Book;
@@ -81,6 +82,11 @@ export default function BooksScreen() {
             renderItem={({item}: Props) => (
               <TouchableOpacity
                 onPress={() => {
+                  const analyticData = {
+                    id: item.id,
+                    name: item.book_name,
+                  };
+                  flurryService.bookViews('Book Views Event', analyticData);
                   setSheetItem(item);
                   sheetRef.current?.snapTo(0);
                 }}>

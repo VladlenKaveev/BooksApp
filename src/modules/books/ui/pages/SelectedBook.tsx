@@ -7,6 +7,7 @@ import {addMyBook} from '../../store/my-books/actions';
 import {BookName, BookAuthor} from '../components/books-list-item/styles';
 import * as S from './styles';
 import {Book} from '../../domain/interfaces/Book';
+import flurryService from '../../../analytics/domain/flurry';
 
 type Props = {
   item: Book | null;
@@ -27,7 +28,12 @@ export default function SelectedBook({item}: Props) {
     setTextShown(!textShown);
   };
   const handleTakeBook = useCallback(() => {
+    const analyticData = {
+      id: item.id,
+      name: item.book_name,
+    };
     dispatch(addMyBook(item));
+    flurryService.bookViews('Take Book Event', analyticData);
   }, [dispatch, item]);
   return (
     <>

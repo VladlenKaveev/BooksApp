@@ -20,7 +20,7 @@ import {useTranslation} from 'react-i18next';
 import WelcomeScreen from '../welcome/ui/pages/WelcomeScreen';
 import {hasOnboardedSelector} from '../welcome/store/selectors';
 import {checkOnboarded} from '../welcome/store/actions';
-import analytics from '../firebase/domain/index';
+import analytics from '../analytics/domain/firebase';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
