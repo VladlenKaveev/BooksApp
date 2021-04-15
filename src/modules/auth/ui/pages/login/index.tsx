@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
 import {Card, CardItem, Input, Container} from 'native-base';
 import {useDispatch} from 'react-redux';
 import {HeaderBar} from '../../../../books/ui/components/header';
@@ -21,7 +21,6 @@ export default function LoginScreen() {
     };
     dispatch(logIn(credentials));
   }, [dispatch, email, password]);
-
   return (
     <Container>
       <HeaderBar name={t('Login')} />

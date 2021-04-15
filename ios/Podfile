@@ -12,7 +12,7 @@ target 'BooksApp' do
     :hermes_enabled => false
   )
 
-
+  pod 'Firebase/Analytics'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   pod 'react-native-config', :path => '../node_modules/react-native-config'
