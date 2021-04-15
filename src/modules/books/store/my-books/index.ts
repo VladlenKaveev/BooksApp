@@ -37,6 +37,6 @@ const MyBookSlice = createSlice({
   },
 });
 
-const MyBooksStore = MyBookSlice.reducer;
-type MyBooksStore = ReturnType<typeof MyBooksStore>;
-export default MyBooksStore;
+const myBooksStore = MyBookSlice.reducer;
+type myBooksStore = ReturnType<typeof myBooksStore>;
+export default myBooksStore;

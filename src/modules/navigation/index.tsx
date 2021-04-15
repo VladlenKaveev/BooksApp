@@ -17,16 +17,20 @@ import {
 } from '../auth/store/selectors';
 import * as S from './styles';
 import {useTranslation} from 'react-i18next';
+import WelcomeScreen from '../welcome/ui/pages/WelcomeScreen';
+import {hasOnboardedSelector} from '../welcome/store/selectors';
+import {checkOnboarded} from '../welcome/store/actions';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function Navigation() {
   const dispatch = useDispatch();
-  const {t} = useTranslation('Pages');
+  const hasOnboarded: boolean = useSelector(hasOnboardedSelector);
   const isAuthLoading: boolean = useSelector(isAuthLoadingSelector);
   const isUserLogin: boolean = useSelector(isUserLoginSelector);
   useEffect(() => {
+    dispatch(checkOnboarded());
     dispatch(checkLogin());
   }, [dispatch]);
   if (isAuthLoading) {
@@ -39,14 +43,18 @@ export default function Navigation() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          {!isUserLogin ? (
-            <>
-              <Stack.Screen
-                name="Login"
-                component={LoginScreen}
-                options={{headerShown: false}}
-              />
-            </>
+          {!hasOnboarded ? (
+            <Stack.Screen
+              name="Welcome"
+              component={WelcomeScreen}
+              options={{headerShown: false}}
+            />
+          ) : !isUserLogin ? (
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{headerShown: false}}
+            />
           ) : (
             <>
               <Stack.Screen

@@ -6,11 +6,13 @@ import {
 import booksReducer from './modules/books/store/books';
 import mybooksReducer from './modules/books/store/my-books';
 import authReducer from './modules/auth/store';
+import welcomeReducer from './modules/welcome/store';
 
 export const rootReducer = combineReducers({
   books: booksReducer,
   mybooks: mybooksReducer,
   auth: authReducer,
+  welcome: welcomeReducer,
 });
 
 const store = configureStore({

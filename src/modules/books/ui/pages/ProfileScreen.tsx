@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Container, Label} from 'native-base';
+import {Container} from 'native-base';
 import {HeaderBar} from '../components/header';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../../auth/store/actions';
@@ -7,7 +7,7 @@ import ProfileMenu from '../components/profile-menu';
 import {useTranslation} from 'react-i18next';
 import i18n from '../../../../locales/index';
 import * as S from './styles';
-import {STORAGE_KEY} from '../../../../locales/index';
+import {STORAGE_KEY} from '../../../../locales';
 import storageService from '../../../core/services/AsyncStorage';
 
 export default function ProfileScreen() {
