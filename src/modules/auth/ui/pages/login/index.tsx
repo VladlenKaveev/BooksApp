@@ -6,10 +6,12 @@ import {logIn} from '../../../store/actions';
 import {AuthCredentials} from '../../../domain/interfaces/AuthCredentials';
 import UdButton from '../../../../ud-ui/components/ud-button';
 import {useTranslation} from 'react-i18next';
+import {KeyboardAvoidingView, Platform} from 'react-native';
 
 export default function LoginScreen() {
   const {t} = useTranslation('Pages');
   const dispatch = useDispatch();
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 10 : 0;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = useCallback(() => {
@@ -19,37 +21,54 @@ export default function LoginScreen() {
     };
     dispatch(logIn(credentials));
   }, [dispatch, email, password]);
+
   return (
     <Container>
       <HeaderBar name={t('Login')} />
-      <Card>
-        <CardItem>
-          <Input
-            testID="email"
-            placeholder="E-mail"
-            value={email}
-            onChangeText={text => {
-              setEmail(text);
-            }}
-          />
-        </CardItem>
-        <CardItem>
-          <Input
-            testID="password"
-            value={password}
-            placeholder="Password"
-            onChangeText={text => setPassword(text)}
-          />
-        </CardItem>
-        <CardItem>
-          <UdButton
-            variant="primary"
-            title={t('LoginButton')}
-            onPress={handleSubmit}
-            testID="login_button"
-          />
-        </CardItem>
-      </Card>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={keyboardVerticalOffset}>
+        <Card>
+          <CardItem>
+            <Input
+              testID="email"
+              placeholder="E-mail"
+              value={email}
+              onChangeText={text => {
+                setEmail(text);
+              }}
+            />
+          </CardItem>
+          <CardItem>
+            <Input
+              testID="password"
+              value={password}
+              placeholder="Password"
+              onChangeText={text => setPassword(text)}
+            />
+          </CardItem>
+          <CardItem>
+            <Input placeholder="Name" />
+          </CardItem>
+          <CardItem>
+            <Input placeholder="Surname" />
+          </CardItem>
+          <CardItem>
+            <Input placeholder="Friend name" />
+          </CardItem>
+          <CardItem>
+            <Input placeholder="Second friend name" />
+          </CardItem>
+          <CardItem>
+            <UdButton
+              variant="primary"
+              title={t('LoginButton')}
+              onPress={handleSubmit}
+              testID="login_button"
+            />
+          </CardItem>
+        </Card>
+      </KeyboardAvoidingView>
     </Container>
   );
 }
