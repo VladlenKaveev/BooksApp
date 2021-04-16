@@ -1,16 +1,11 @@
 import Flurry from 'react-native-flurry-sdk';
 import Config from 'react-native-config';
 
-export type Props = {
-  id: string;
-  name: string;
-};
-
 export class FlurryService {
   constructor(private FLURRY_IOS_API_KEY: string) {}
 
-  public bookViews(eventID: string, data: Props): void {
-    Flurry.logEvent(eventID, {data}, true);
+  public createEvent(eventID: string, data: string): void {
+    Flurry.logEvent(eventID, {data}, false);
   }
 
   public init(): void {
@@ -19,6 +14,19 @@ export class FlurryService {
       .withLogEnabled(true)
       .withLogLevel(Flurry.LogLevel.DEBUG)
       .build(this.FLURRY_IOS_API_KEY);
+  }
+
+  public getVersion(): void {
+    Flurry.getVersions().then(versions => {
+      console.log(
+        'Versions: ' +
+          versions.agentVersion +
+          ' : ' +
+          versions.releaseVersion +
+          ' : ' +
+          versions.sessionId,
+      );
+    });
   }
 }
 

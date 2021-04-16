@@ -82,11 +82,7 @@ export default function BooksScreen() {
             renderItem={({item}: Props) => (
               <TouchableOpacity
                 onPress={() => {
-                  const analyticData = {
-                    id: item.id,
-                    name: item.book_name,
-                  };
-                  flurryService.bookViews('Book Views Event', analyticData);
+                  flurryService.createEvent('Book Views Event', item.book_name);
                   setSheetItem(item);
                   sheetRef.current?.snapTo(0);
                 }}>

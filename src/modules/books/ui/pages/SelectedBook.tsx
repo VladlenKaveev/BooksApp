@@ -33,7 +33,7 @@ export default function SelectedBook({item}: Props) {
       name: item.book_name,
     };
     dispatch(addMyBook(item));
-    flurryService.bookViews('Take Book Event', analyticData);
+    flurryService.createEvent('Take Book Event', analyticData);
   }, [dispatch, item]);
   return (
     <>
