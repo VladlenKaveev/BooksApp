@@ -8,12 +8,12 @@ export type Props = {
 
 export class FlurryService {
   constructor(private FLURRY_IOS_API_KEY: string) {}
+
   public bookViews(eventID: string, data: Props): void {
-    this.init();
     Flurry.logEvent(eventID, {data}, true);
   }
 
-  private init(): void {
+  public init(): void {
     new Flurry.Builder()
       .withCrashReporting(true)
       .withLogEnabled(true)
